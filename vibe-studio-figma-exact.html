@@ -177,9 +177,9 @@ a{color:inherit}
   .m-brand img{width:30px;height:30px;object-fit:cover}
   .m-brand-text{font:500 18px/1 Roboto,sans-serif;letter-spacing:.36px;text-transform:uppercase;color:#cdcdcd;white-space:nowrap}
   .m-brand-text span{color:#da7038}
-  .m-menu-btn{position:relative;z-index:61;width:61px;height:22px;border:0;padding:0;background:transparent;display:block}
+  .m-menu-btn{position:relative;z-index:58;width:61px;height:22px;border:0;padding:0;background:transparent;display:block}
   .m-menu-btn img{display:block;width:61px;height:21.681px}
-  .m-map-link{position:absolute;z-index:62;right:56px;top:16px;width:32px;height:44px;border-radius:10px;outline-offset:2px}
+  .m-map-link{position:absolute;z-index:59;right:56px;top:16px;width:32px;height:44px;border-radius:10px;outline-offset:2px}
   .m-map-link:focus-visible,.m-menu-btn:focus-visible{outline:3px solid #f7671d}
   .m-menu-panel{display:none;position:absolute;z-index:40;right:16px;top:62px;width:178px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(38,37,37,.96);backdrop-filter:blur(12px)}
   .m-menu-panel.open{display:flex;flex-direction:column;gap:12px}
@@ -527,8 +527,8 @@ a{color:inherit}
   .m-brand img{width:37px;height:37px;object-fit:cover}
   .m-brand-text{width:97px;font:500 16px/1 Roboto,sans-serif;letter-spacing:.32px;text-transform:uppercase;color:#cdcdcd}
   .m-brand-text span{color:#da7038}
-  .m-menu-panel{right:-1px;top:0;width:154px;height:385px;padding:81px 24px 20px 12px;border:.5px solid rgba(255,255,255,.06);border-radius:0;background:rgba(0,0,0,.04);backdrop-filter:blur(13.95px);-webkit-backdrop-filter:blur(13.95px)}
-  .m-menu-panel.open{display:flex;flex-direction:column;gap:40px;align-items:flex-end;justify-content:flex-start;background:rgba(20,20,20,.92)}
+  .m-menu-panel{display:flex;right:-1px;top:0;width:154px;height:410px;padding:81px 24px 20px 12px;border:.5px solid rgba(255,255,255,.06);border-radius:0;background:rgba(20,20,20,.92);backdrop-filter:blur(13.95px);-webkit-backdrop-filter:blur(13.95px);opacity:0;visibility:hidden;pointer-events:none;transform:translateX(12px);transition:opacity .28s ease-out,transform .28s ease-out,visibility 0s linear .28s}
+  .m-menu-panel.open{display:flex;flex-direction:column;gap:40px;align-items:flex-end;justify-content:flex-start;opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0);transition-delay:0s}
   .m-menu-panel a{width:117px;padding:0;font:500 14px/1 Roboto,sans-serif;letter-spacing:.28px;text-transform:uppercase;color:#fff}
   .m-menu-close{display:none;right:24.5px;top:29px;width:18px;height:12px}
   .m-menu-close img{width:18px;height:12px}
@@ -731,7 +731,7 @@ a{color:inherit}
 button:not(:disabled){transition-property:transform,filter,background-color,border-color,box-shadow;transition-duration:.18s;transition-timing-function:ease}
 @media (hover:hover) and (pointer:fine){button:not(:disabled):hover,button:not(:disabled):focus-visible{transform:translateY(-2px)}}
 button:not(:disabled):active{transform:translateY(0) scale(.98)}
-@media (prefers-reduced-motion:reduce){button:not(:disabled){transition:none!important;transform:none!important}}
+@media (prefers-reduced-motion:reduce){button:not(:disabled),.m-menu-panel{transition:none!important;transform:none!important}}
 </style>
 </head>
 <body>
