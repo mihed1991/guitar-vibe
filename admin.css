@@ -57,7 +57,8 @@
 .admin-empty{padding:32px;border:1px dashed var(--admin-border);border-radius:16px;color:var(--admin-muted);text-align:center}
 
 @media (max-width:767px){
-  .admin-entry{right:16px;bottom:8px;min-height:30px;padding:6px 10px;font-size:10px}
+  .admin-entry{left:16px;right:auto;bottom:8px;min-height:26px;padding:4px 8px;font-size:9px}
+  .admin-entry::before{content:"";position:absolute;inset:-9px}
   .m-footer{overflow:visible}
   .contact-mark,.contact-image{width:14px;height:14px;border-radius:4px;font-size:8px}
   .admin-overlay{padding:0;place-items:stretch}
