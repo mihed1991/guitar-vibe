@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "engineVersion": "4.0.0",
+  "generatedAt": "2026-08-15T17:29:55.970Z",
+  "selection": {
+    "agent": "codex",
+    "grammar": "operations-console",
+    "grammarSource": "built-in:operations-console",
+    "fallback": "operations-console",
+    "adapter": "product-ui",
+    "domain": "education",
+    "page": "settings",
+    "recipe": "enterprise-workbench",
+    "recipeSelection": "enterprise-workbench",
+    "palette": "warm-clay-commerce",
+    "paletteSelection": "warm-clay-commerce",
+    "profile": "none"
+  },
+  "bundle": {
+    "path": ".styleseed/effective-rules.md",
+    "sha256": "494e879790f7abbde9c088521f81b0bdb01c9d623ed14c3e4f7fe081d0791465",
+    "bytes": 16036
+  },
+  "sources": [
+    {
+      "id": "agent-execution",
+      "sha256": "dfe4b0a2de36209ca50a04b39e35c248ac13fb8b059428fdb68a484cffc190cb",
+      "bytes": 329
+    },
+    {
+      "id": "core",
+      "sha256": "ed1cd2f73c34c197de665cb89d23f4b9e0753a8ff13c6a816f517a7cb0c32987",
+      "bytes": 4637
+    },
+    {
+      "id": "grammar",
+      "sha256": "e0439317e2e1c0722e391e9645b21978818f0d14dd07633385792f8e5a44b962",
+      "bytes": 1011
+    },
+    {
+      "id": "adapter",
+      "sha256": "7b5b5c34b0b235dca329e6384ccb94c66ee65a348bbe7142277ae7bbda3c13b0",
+      "bytes": 714
+    },
+    {
+      "id": "domain",
+      "sha256": "8192f7a04edd7ea2466685e4418cbbde7913f77bd7237f78ac4fcd11436bd8a4",
+      "bytes": 951
+    },
+    {
+      "id": "page",
+      "sha256": "3ec19581a76a4982edbc2a669b5245b7c884bd4e6c540d5c6a49c1887abba2e5",
+      "bytes": 936
+    },
+    {
+      "id": "recipe",
+      "sha256": "0b472aa9cccada93e1c5c0260070bbfcda76a75d7de61e2cb22938c39981aaf8",
+      "bytes": 1304
+    },
+    {
+      "id": "palette",
+      "sha256": "a118b52dde99aaf9bab826d26bbb0aa43d2162f844e1aa2abc3a5f815f71935d",
+      "bytes": 969
+    },
+    {
+      "id": "lock",
+      "sha256": "01b0f6a72733c2c946ba7aafcf7226308747a2ffcf2ad5fb7ba8a427694cf81f",
+      "bytes": 851
+    },
+    {
+      "id": "craft",
+      "sha256": "9f8b9c38d3ec1dc6d476a149b7c3502b27c51cbb55bce397a696b44335a22d21",
+      "bytes": 3564
+    }
+  ]
+}

@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guitar Vibe</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;500&family=Roboto:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+<style>
+:root{--orange:#f7671d;--orange2:#ea580c;--dark:#262525;--card:#313030;--paper:#e9ded8;--muted:#8e8e8e;--ink:#000}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#171717;color:#fff;font-family:Roboto,Arial,sans-serif;overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.site-header{position:fixed;z-index:1000;top:0;left:50%;width:min(1440px,100%);height:109px;transform:translateX(-50%);transition:transform .28s ease,background .28s ease;backdrop-filter:blur(5.95px);-webkit-backdrop-filter:blur(5.95px);background:rgba(38,37,37,.42)}
+.site-header.is-hidden{transform:translate(-50%,-112%)}
+.header-inner{height:109px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand-wrap{display:flex;align-items:center;flex:0 0 auto}
+.header-logo{width:69px;height:69px;object-fit:cover;display:block}
+.brand{font:500 30px/1 Roboto,sans-serif;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;color:#cdcdcd}
+.brand .accent{color:#da7038}
+.nav{display:flex;gap:24px;align-items:center;font:400 14px/1 Roboto,sans-serif;letter-spacing:.28px;text-transform:uppercase;white-space:nowrap}
+.nav a{text-decoration:none;position:relative;padding:8px 0}
+.nav a::after{content:"";position:absolute;left:0;bottom:1px;width:0;height:1px;background:var(--orange);transition:width .2s ease}
+.nav a:hover::after{width:100%}
+.addr{width:282px;height:45px;display:flex;gap:8px;align-items:center;color:#fdfdfd;flex:0 0 auto;transform:translateX(clamp(-40%,calc(591.5px - 50vw),0px))}
+.addr img{width:19px;height:21.681px}
+.addr-text{font:400 14px/1 Roboto,sans-serif;letter-spacing:.28px;text-transform:uppercase;line-height:1;white-space:nowrap}
+.desktop-stage{position:relative;width:1440px;height:5756px;margin:0 auto;background:var(--dark);overflow:hidden;border-radius:4px}
+.hero-image{position:absolute;left:1px;top:-43px;width:1440px;height:960px;object-fit:cover}
+.hero-card{position:absolute;left:810px;top:184px;width:546px;height:499px;padding:24px;border-radius:25px;background:rgba(61,61,61,.77);backdrop-filter:blur(6.95px);-webkit-backdrop-filter:blur(6.95px);display:flex;flex-direction:column;gap:40px;align-items:center}
+.hero-copy{width:498px;height:271px;display:flex;flex-direction:column;align-items:center;gap:40px;text-align:center;color:#e0dfdf}
+.eyebrow{font:400 11px/1 Roboto,sans-serif;letter-spacing:.22px;text-transform:uppercase}
+.hero-title{margin:0;width:498px;height:88px;font:500 38px/1.1 Roboto,sans-serif;text-transform:uppercase;display:flex;flex-direction:column;justify-content:center}
+.hero-title .accent{color:#f07331}
+.hero-desc{margin:0;width:498px;font:300 16px/1.3 'Roboto Condensed',sans-serif}
+.hero-desc strong{font-weight:400}
+.hero-actions{width:498px;height:140px;display:flex;flex-direction:column;gap:20px}
+.btn-main,.btn-ghost,.small-main,.price-btn,.cta-primary,.cta-secondary,.form-next,.form-back,.choice{transition:transform .12s ease,filter .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
+.btn-main:hover,.small-main:hover,.cta-primary:hover,.form-next:hover{filter:brightness(1.09)}
+.btn-main:active,.small-main:active,.cta-primary:active,.form-next:active,.price-btn:active,.cta-secondary:active,.form-back:active,.choice:active{transform:scale(.98)}
+.btn-ghost:hover,.price-btn:hover,.cta-secondary:hover,.form-back:hover{background:rgba(255,255,255,.08)}
+.btn-main{height:60px;border:0;border-radius:10px;background:#ea580c;color:#ebebeb;font:400 18px/1 Roboto,sans-serif;letter-spacing:1.44px}
+.btn-ghost{height:60px;border:1px solid #e0dfdf;border-radius:10px;background:transparent;color:#e0dfdf;font:400 16px/1 Roboto,sans-serif;letter-spacing:1.28px}
+.section-label{margin:0;color:#ea580c;font:500 18px/normal Inter,sans-serif;text-align:center}
+.format{position:absolute;left:1px;top:917px;width:1440px;height:632px;padding:80px 0;display:flex;flex-direction:column;align-items:center;gap:30px}
+.cards-row{height:420px;display:flex;gap:60px;align-items:center;justify-content:center}
+.format-card{height:420px;border:1px solid rgba(255,255,255,.1);border-radius:28px;background:rgba(255,255,255,.05);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:44px 36px;width:372px;position:relative}
+.format-card.group{width:348px;padding-left:24px;padding-right:24px}
+.popular{background:rgba(255,255,255,.17);border-color:rgba(255,255,255,.4)}
+.format-content{width:300px;display:flex;flex-direction:column;gap:22px}
+.format-card h3{margin:0;width:300px;font:700 28px/normal Manrope,sans-serif}
+.format-card .desc{margin:0;width:300px;font:400 18px/1.5 Manrope,sans-serif;color:rgba(255,255,255,.8)}
+.tags{width:300px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.07);font:500 14px/normal Manrope,sans-serif;color:#fffff0;white-space:nowrap}
+.small-main{width:300px;height:47px;border:0;border-radius:14px;background:#ea580c;color:#fff;font:700 14px/normal Manrope,sans-serif}
+.popular{position:absolute;top:11px;right:17px;padding:4px 10px;border:1px solid #fff;border-radius:25px;font:400 12px/1.5 Manrope,sans-serif}
+.age{position:absolute;left:0;top:1549px;width:1440px;height:926px;padding:80px 129px;background:var(--paper);color:#000;display:flex;flex-direction:column;align-items:center;gap:30px}
+.age-title{margin:0;width:1182px;font:500 38px/1 Roboto,sans-serif;letter-spacing:.76px;text-align:center}
+.age-sub{margin:0;width:1182px;font:300 18px/1 Roboto,sans-serif;letter-spacing:.36px;text-align:center;line-height:18px}
+.age-grid{width:1182px;height:580px;display:flex;flex-direction:column;gap:40px}
+.age-row{display:flex;gap:81px;justify-content:center}
+.age-card{width:340px;height:270px;padding:24px;border:1px solid #d8d4d4;border-radius:25px;background:rgba(49,48,48,.1);backdrop-filter:blur(6.35px);display:flex;flex-direction:column;gap:30px}
+.age-badge{align-self:flex-start;padding:12px 16px;border-radius:25px;background:#f7671d;color:#fff;font:500 14px/1 Roboto,sans-serif;letter-spacing:.28px}
+.age-card h3{margin:0;width:290px;font:500 22px/1 Roboto,sans-serif;letter-spacing:.44px}
+.age-card p{margin:0;width:290px;font:300 18px/1 Roboto,sans-serif;letter-spacing:.72px}
+.how{position:absolute;left:0;top:2475px;width:1440px;height:482px;padding:80px 0;display:flex;flex-direction:column;gap:40px;align-items:center}
+.how-row{display:flex;gap:20px;justify-content:center}
+.how-card{width:324px;height:260px;padding:24px 16px;border-radius:25px;background:#313030;display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center}
+.num{width:60px;height:60px;border-radius:50%;background:#f7671d;display:flex;align-items:center;justify-content:center;font:500 20px/1.3 'Roboto Condensed',sans-serif}
+.how-card h3{margin:0;width:292px;font:400 28px/normal Roboto,sans-serif}
+.how-card p{margin:0;width:292px;font:300 18px/normal Roboto,sans-serif}
+.about{position:absolute;left:0;top:2957px;width:1440px;height:622px;padding:80px;background:var(--paper);color:#000;display:flex;flex-direction:column;gap:40px;align-items:center}
+.about-inner{width:1182px;height:400px;display:flex;gap:40px}
+.about-photo{width:600px;height:400px;border-radius:25px;object-fit:cover}
+.about-right{width:542px;height:354px;display:flex;flex-direction:column;gap:60px;align-items:flex-end}
+.about-title{margin:0;width:542px;font:500 38px/normal Roboto,sans-serif;text-align:center}
+.about-card{width:542px;padding:36px;border:1px solid #262525;border-radius:28px;background:rgba(255,255,255,.05);backdrop-filter:blur(15px)}
+.about-card p{margin:0;font:300 18px/normal Inter,sans-serif;line-height:normal}
+.about-card .accent{color:#f7671d;font-weight:400}
+.instruments{position:absolute;left:0;top:3579px;width:1440px;height:327px;padding:40px 0;display:flex;flex-direction:column;gap:40px;align-items:center}
+.inst-title{margin:0;width:1440px;font:400 38px/normal Roboto,sans-serif;text-align:center}
+.inst-row{display:flex;gap:40px}
+.inst{height:100px;border-radius:25px;background:#313030;display:flex;align-items:center;justify-content:center;text-align:center;font:400 20px/normal Inter,sans-serif}
+.inst.w210{width:210px} .inst.w240{width:240px}
+.reviews{position:absolute;left:0;top:3906px;width:1440px;height:490px;padding:40px 118px 80px;background:var(--paper);color:#000;display:flex;flex-direction:column;gap:40px;align-items:center}
+.review-row{display:flex;gap:41px}
+.review{width:374px;height:308px;padding:16px 48px;border-radius:25px;background:#fff;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
+.stars{width:182px;height:30px}
+.review-text{margin:0;width:278px;font:300 18px/normal Roboto,sans-serif}
+.review-person{width:278px;height:60px;display:flex;gap:20px;align-items:center}
+.review-person>img{width:60px;height:60px;border-radius:50%;object-fit:cover}
+.review-person div{display:flex;flex-direction:column;gap:10px}
+.review-person strong{font:500 18px/normal Roboto,sans-serif} .review-person small{font:300 12px/normal Roboto,sans-serif}
+.pricing{position:absolute;left:0;top:4396px;width:1440px;height:622px;padding:40px 0;display:flex;flex-direction:column;gap:40px;align-items:center}
+.price-row{width:1180px;display:flex;gap:20px}
+.price-card{width:380px;height:480px;padding:32px 24px;border-radius:25px;background:#313030;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.price-top{width:332px;display:flex;flex-direction:column;gap:40px}
+.price-card h3{margin:0;font:400 28px/normal Roboto,sans-serif}
+.price{font:500 48px/normal Roboto,sans-serif;color:#f7671d} .price span{font-size:28px;color:#fff}
+.price-mid{width:332px;display:flex;flex-direction:column;gap:34px;font-size:18px}
+.price-mid>div{font-weight:400} .price-mid ul{margin:0 auto;padding-left:27px;width:257px;text-align:left;font-weight:300;line-height:normal}
+.price-btn{width:332px;height:52px;border:1px solid #fff;border-radius:25px;background:transparent;color:#fff;font:400 22px/normal Roboto,sans-serif}
+.cta{position:absolute;left:0;top:5038px;width:1440px;height:314px;padding:40px 136px;background:var(--paper);color:#000;display:flex;flex-direction:column;align-items:center}
+.cta-inner{width:1168px;display:flex;flex-direction:column;gap:40px;align-items:center}
+.cta-copy{width:1168px;text-align:center;display:flex;flex-direction:column;gap:20px}
+.cta-copy h2{margin:0;font:500 38px/normal Roboto,sans-serif} .cta-copy p{margin:0;font:300 23px/normal Roboto,sans-serif}
+.cta-copy strong{font-weight:500}
+.cta-actions{display:flex;gap:20px}
+.cta-secondary,.cta-primary{width:442px;height:75px;border-radius:25px;display:flex;align-items:center;justify-content:center;text-align:center}
+.cta-secondary{border:1px solid #000;background:transparent;color:#000}
+.cta-secondary .l1{font-size:18px;line-height:19px} .cta-secondary .l2{font-size:12px;line-height:19px}
+.cta-primary{border:0;background:#f7671d;color:#fff;font:400 23px/normal Roboto,sans-serif}
+.footer{position:absolute;left:0;top:5352px;width:1440px;height:404px;padding:40px;display:flex;flex-direction:column;gap:40px;align-items:center}
+.footer-top{width:1360px;height:270px;display:flex;gap:376px;align-items:flex-start}
+.footer-brand{width:313px;display:flex;flex-direction:column;gap:24px} .footer-brand h2{margin:0;font:500 38px/normal Roboto,sans-serif} .footer-brand h2 span{color:#f7671d} .footer-brand p{margin:0;font:300 22px/normal Roboto,sans-serif}
+.footer-links{width:471px;display:flex;justify-content:space-between}
+.footer-col{width:165px;display:flex;flex-direction:column;gap:49px} .footer-col:first-child{width:143px;gap:48px}
+.footer-col h3{margin:0;font:500 28px/normal Roboto,sans-serif} .footer-list{display:flex;flex-direction:column;gap:24px;font:300 22px/normal Roboto,sans-serif;color:#8e8e8e}
+.footer-list a{text-decoration:none} .social-link{display:flex;gap:8px;align-items:center} .social-link img{width:30px;height:30px}
+.vk-icon{width:30px;height:30px;border-radius:9px;background:#1a76ff;display:grid;place-items:center} .vk-icon img{width:18px;height:12px}
+.copy{margin:0;width:1360px;text-align:center;color:#8e8e8e;font:300 12px/normal Roboto,sans-serif}
+/* reveal */
+.lazy-reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)} .lazy-reveal.is-visible{opacity:1;transform:none}
+/* form */
+.modal{position:fixed;z-index:2000;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:24px;overflow:auto}
+.modal.open{display:flex}
+.form-card{width:1000px;max-width:100%;background:var(--paper);color:#000;border-radius:25px;padding:40px 80px;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.35);animation:formIn .32s ease}
+@keyframes formIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+.form-close{position:absolute;right:20px;top:20px;width:40px;height:40px;border-radius:50%;border:1px solid #000;background:transparent;padding:10px;display:none;align-items:center;justify-content:center}
+.form-close.show{display:flex} .form-close img{width:18.243px;height:18.242px}
+.form-head{display:flex;flex-direction:column;gap:16px;margin-bottom:34px}
+.form-head h2{margin:0;font:500 38px/normal Roboto,sans-serif}
+.progress-track{width:100%;height:6px;border-radius:999px;background:rgba(0,0,0,.12);overflow:hidden}
+.progress-fill{height:100%;width:20%;border-radius:inherit;background:var(--orange2);transition:width .28s ease}
+.form-section{display:flex;flex-direction:column;gap:20px}
+.form-section h3{margin:0;font:400 28px/normal Roboto,sans-serif} .form-section .sub{margin:0;font:300 18px/normal Roboto,sans-serif}
+.choice-grid{display:grid;grid-template-columns:repeat(2,260px);gap:16px;justify-content:center;margin-top:20px}
+.choice-grid.format-grid{gap:40px}
+.choice{height:80px;border:1px solid #000;border-radius:25px;background:transparent;color:#000;padding:8px 24px;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+.choice strong{font-size:18px;font-weight:500} .choice small{font-size:14px;font-weight:300} .choice .tiny{font-size:12px}
+.choice:hover{background:rgba(234,88,12,.06)} .choice.selected{border:3px solid var(--orange2);background:rgba(189,128,128,.08)} .choice.invalid{box-shadow:0 0 0 2px #c90000}
+.form-actions{display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.form-next,.form-back{min-width:188px;height:61px;padding:0 60px;border-radius:25px;font:400 18px/normal Roboto,sans-serif}
+.form-next{border:0;background:#ea580c;color:#fff} .form-back{border:1px solid #000;background:transparent;color:#000;min-width:135px;padding:0 40px}
+.form-actions.only-next{justify-content:flex-end}
+.contact-grid{width:724px;max-width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.field{display:flex;flex-direction:column;gap:16px} .field.full{grid-column:1/-1} .field label{font:300 18px/normal Roboto,sans-serif} .req{color:#c90000}
+.field input,.field select,.field textarea{width:100%;border:0;border-radius:25px;background:#d5ccc9;box-shadow:inset 0 1px 5px rgba(0,0,0,.25);outline:0;color:#000;font:300 18px/normal Roboto,sans-serif}
+.field input,.field select{height:60px;padding:0 16px} .field textarea{height:70px;padding:22px 16px;resize:none}
+.field input::placeholder,.field textarea::placeholder{color:#929292} .field select:invalid{color:#808080}
+.field input.invalid,.field select.invalid{box-shadow:inset 0 1px 5px rgba(0,0,0,.25),0 0 0 2px #c90000}
+.consent{display:flex;gap:20px;align-items:center;margin-top:40px;color:#4e4e4e;font:400 20px/normal Roboto,sans-serif;cursor:pointer}
+.consent input{appearance:none;width:26px;height:26px;border:2px solid #111;background:transparent;flex:0 0 auto;position:relative}
+.consent input:checked::after{content:"";position:absolute;width:12px;height:7px;border-left:3px solid #ea580c;border-bottom:3px solid #ea580c;transform:rotate(-45deg);left:5px;top:5px}
+.consent.invalid{outline:2px solid #c90000;outline-offset:5px;border-radius:4px}
+.success{text-align:center;display:flex;flex-direction:column;gap:34px;align-items:center} .success h2{margin:0;font:500 38px/normal Roboto,sans-serif} .success-data{display:grid;grid-template-columns:1fr 1fr;gap:100px;text-align:left;font:300 24px/normal Roboto,sans-serif} .success-data b{font-weight:400} .success-return{height:61px;padding:0 60px;border:0;border-radius:25px;background:#ea580c;color:#fff;font-size:18px}
+.hidden{display:none!important}
+
+/* Mobile layout from Figma node 75:2396 (430 × 4516) */
+.mobile-stage-wrap{display:none}
+.mobile-stage{display:none}
+@media (max-width:767px){
+  body{background:#262525;overflow-x:hidden}
+  .site-header,.desktop-stage{display:none!important}
+  .mobile-stage-wrap{display:block;position:relative;width:100%;height:4556px;background:#262525;overflow:hidden}
+  .mobile-stage{display:block;position:absolute;left:50%;top:0;width:430px;height:4556px;margin-left:-215px;background:#262525;color:#fff;overflow:hidden;transform-origin:top center;transform:scale(var(--mobile-scale,1))}
+  .m-hero-bg{position:absolute;left:0;top:0;width:431px;height:410px;overflow:hidden}
+  .m-hero-bg img{position:absolute;top:0;left:-42.69%;width:142.67%;height:100%;max-width:none;object-fit:cover}
+  .m-header{position:absolute;z-index:30;left:0;top:0;width:430px;height:70px;padding:20px 24px;border:.5px solid rgba(255,255,255,.06);background:rgba(230,230,230,.05);backdrop-filter:blur(3.75px);-webkit-backdrop-filter:blur(3.75px);display:flex;align-items:center;justify-content:space-between}
+  .m-brand{display:flex;align-items:center;width:168px;height:30px}
+  .m-brand img{width:30px;height:30px;object-fit:cover}
+  .m-brand-text{font:500 18px/1 Roboto,sans-serif;letter-spacing:.36px;text-transform:uppercase;color:#cdcdcd;white-space:nowrap}
+  .m-brand-text span{color:#da7038}
+  .m-menu-btn{width:61px;height:22px;border:0;padding:0;background:transparent;display:block}
+  .m-menu-btn img{display:block;width:61px;height:21.681px}
+  .m-map-link{position:absolute;z-index:2;right:56px;top:16px;width:32px;height:44px;border-radius:10px;outline-offset:2px}
+  .m-map-link:focus-visible,.m-menu-btn:focus-visible{outline:3px solid #f7671d}
+  .m-menu-panel{display:none;position:absolute;z-index:40;right:16px;top:62px;width:178px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(38,37,37,.96);backdrop-filter:blur(12px)}
+  .m-menu-panel.open{display:flex;flex-direction:column;gap:12px}
+  .m-menu-panel a{font:400 13px/1.2 Roboto,sans-serif;text-transform:uppercase;text-decoration:none;color:#fff}
+
+  .m-hero-card{position:absolute;left:16px;top:223px;width:398px;height:165px;padding:24px;border:1px solid rgba(255,255,255,.06);border-radius:25px;background:rgba(255,255,255,.05);backdrop-filter:blur(3.5px);-webkit-backdrop-filter:blur(3.5px);display:flex;flex-direction:column;gap:26px;align-items:center}
+  .m-hero-copy{width:348px;height:49px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;text-transform:uppercase;color:#e0dfdf}
+  .m-hero-copy h1{margin:0;width:348px;height:16px;font:500 22px/1.1 Roboto,sans-serif;white-space:nowrap}
+  .m-hero-copy h1 span{color:#f07331}
+  .m-hero-copy p{margin:0;width:348px;height:9px;font:400 12px/1 Roboto,sans-serif;letter-spacing:.24px}
+  .m-hero-card .m-main-btn{width:348px;height:40px;border:0;border-radius:10px;background:#ea580c;color:#ebebeb;font:300 16px/1 Roboto,sans-serif}
+
+  .m-section-label{margin:0;width:100%;height:17px;color:#ea580c;font:500 14px/normal Inter,sans-serif;text-align:center;text-transform:uppercase}
+  .m-formats{position:absolute;left:0;top:450px;width:430px;height:697px;padding:0 16px;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-format-list{width:398px;height:656px;display:flex;flex-direction:column;gap:16px}
+  .m-format-card{position:relative;width:398px;height:208px;padding:24px 24px 12px;border:1px solid rgba(255,255,255,.1);border-radius:28px;background:rgba(255,255,255,.05);backdrop-filter:blur(15px);display:flex;flex-direction:column;gap:16px;align-items:center}
+  .m-format-card h3{margin:0;width:350px;font:700 16px/normal Manrope,sans-serif}
+  .m-format-card .m-desc{margin:0;width:350px;font:400 14px/1.5 Manrope,sans-serif;color:rgba(255,255,255,.8)}
+  .m-format-bottom{width:350px;min-height:97px;display:flex;flex-direction:column;align-items:flex-end;gap:30px;padding-right:8px}
+  .m-format-card.offline .m-format-bottom{gap:0;padding-right:0}
+  .m-tags{width:100%;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .m-tag{padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.07);font:500 10px/normal Manrope,sans-serif;color:#fffff0;white-space:nowrap}
+  .m-card-btn{width:144px;height:43px;border:0;border-radius:14px;background:#ea580c;color:#fff;font:600 14px/normal Manrope,sans-serif}
+  .m-popular{position:absolute;right:22px;top:15px;padding:4px 8px;border:.5px solid rgba(255,255,255,.56);border-radius:25px;background:rgba(255,255,255,.11);font:400 10px/1.5 Manrope,sans-serif}
+
+  .m-about{position:absolute;left:0;top:1167px;width:430px;height:547px;padding:20px 0;background:#e9ded8;color:#000;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-about-inner{width:380px;height:466px;display:flex;flex-direction:column;gap:16px}
+  .m-about-photo{width:380px;height:259px;border-radius:14.083px;object-fit:cover}
+  .m-about-card{width:380px;height:191px;padding:36px;border:1px solid rgba(49,48,48,.11);border-radius:28px;background:rgba(49,48,48,.1);backdrop-filter:blur(15px);display:flex;align-items:center}
+  .m-about-card p{margin:0;width:308px;font:300 14px/normal Inter,sans-serif;color:#000}
+  .m-about-card .accent{color:#f7671d;font-weight:400}
+
+  .m-how{position:absolute;left:17px;top:1734px;width:396px;height:501px;padding:20px 0;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-how-list{width:396px;height:420px;display:flex;flex-direction:column;gap:16px}
+  .m-how-card{width:396px;height:93px;padding:16px;border-radius:25px;background:#313030;display:flex;gap:20px;align-items:center}
+  .m-how-num{width:60px;height:60px;flex:0 0 60px;border-radius:50%;background:#f7671d;display:grid;place-items:center;font:500 20px/1.3 'Roboto Condensed',sans-serif}
+  .m-how-copy{width:284px;height:61px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .m-how-copy h3{margin:0;font:400 18px/normal Roboto,sans-serif}
+  .m-how-copy p{margin:0;width:284px;font:300 14px/normal Roboto,sans-serif}
+
+  .m-instruments{position:absolute;left:0;top:2255px;width:430px;height:485px;padding:20px 0;background:#e9ded8;color:#000;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+  .m-inst-list{width:430px;height:404px;padding:0 16px;display:flex;flex-direction:column;gap:16px}
+  .m-inst{width:398px;height:68px;padding:6px 16px;border:.5px solid rgba(0,0,0,.09);border-radius:25px;background:rgba(49,48,48,.1);backdrop-filter:blur(6.25px);display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+  .m-inst-name{font:400 14px/normal Inter,sans-serif;color:#000}
+  .m-badges{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end;width:152px}
+  .m-badges.narrow{width:92px;align-content:flex-end}
+  .m-badge{height:27px;padding:8px;border:.5px solid #f7671d;border-radius:25px;display:flex;align-items:center;justify-content:center;font:300 10px/1 Roboto,sans-serif;letter-spacing:.2px;color:#000;white-space:nowrap}
+
+  .m-reviews{position:absolute;left:0;top:2760px;width:430px;height:669px;padding:20px 16px;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-review-list{width:398px;height:588px;display:flex;flex-direction:column;gap:16px}
+  .m-review{width:398px;min-height:180px;padding:20px 8px;border-radius:25px;background:#313030;display:flex;gap:16px;align-items:center;justify-content:center}
+  .m-review.tall{min-height:196px}
+  .m-review-person{display:flex;gap:16px;align-items:center;flex:0 0 auto}
+  .m-review-person>img{width:60px;height:60px;border-radius:50%;object-fit:cover}
+  .m-review-person .person-copy{display:flex;flex-direction:column;gap:4px;white-space:nowrap}
+  .m-review-person strong{font:500 14px/normal Roboto,sans-serif;color:#fff}
+  .m-review-person small{font:300 12px/normal Roboto,sans-serif;color:#bbb}
+  .m-review-copy{flex:1;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-stars{display:flex;gap:8px;width:100%}
+  .m-stars img{width:20px;height:20px}
+  .m-review-copy p{margin:0;width:100%;font:300 14px/normal Roboto,sans-serif;color:#fff}
+
+  .m-pricing{position:absolute;left:0;top:3449px;width:430px;height:661px;padding:20px 0;background:#e9ded8;color:#000;display:flex;flex-direction:column;gap:20px;align-items:center}
+  .m-price-grid{width:430px;height:584px;padding:0 16px;display:grid;grid-template-columns:191px 191px;grid-template-rows:284px 284px;gap:16px}
+  .m-price-card{width:191px;height:284px;padding:24px 16px;border-radius:25px;background:rgba(49,48,48,.1);display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+  .m-price-card.individual,.m-price-card.group{padding:32px 24px}
+  .m-price-title{width:159px;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-price-card.individual .m-price-title,.m-price-card.group .m-price-title{width:143px}
+  .m-price-card h3{margin:0;width:100%;font:400 18px/normal Roboto,sans-serif}
+  .m-price-sub{width:100%;font:200 14px/normal Roboto,sans-serif}
+  .m-price-bottom{width:159px;display:flex;flex-direction:column;gap:32px;align-items:center}
+  .m-price-card.individual .m-price-bottom,.m-price-card.group .m-price-bottom{width:143px;gap:24px}
+  .m-price{font:500 38px/normal Roboto,sans-serif;color:#f7671d}.m-price span{font-size:18px;color:#000}
+  .m-price-btn{width:100%;height:45px;border:1px solid #000;border-radius:25px;background:transparent;color:#000;font:400 16px/normal Roboto,sans-serif}
+
+  .m-cta{position:absolute;left:16px;top:4130px;width:398px;height:135px;display:flex;flex-direction:column;gap:24px;align-items:center}
+  .m-cta-copy{width:398px;height:49px;display:flex;flex-direction:column;gap:16px;text-align:center;color:#fff}
+  .m-cta-copy h2{margin:0;font:500 16px/normal Roboto,sans-serif}
+  .m-cta-copy p{margin:0;font:300 12px/normal Roboto,sans-serif}.m-cta-copy strong{font-weight:500}
+  .m-cta-actions{width:398px;height:62px;display:flex;gap:24px}
+  .m-consult{width:140px;height:62px;border:1px solid #fff;border-radius:25px;background:transparent;color:#fff;font:300 14px/normal Roboto,sans-serif;padding:6px 12px}
+  .m-cta-primary{width:234px;height:62px;border:0;border-radius:25px;background:#f7671d;color:#fff;font:300 16px/normal Roboto,sans-serif;padding:12px 24px}
+
+  .m-footer{position:absolute;left:0;top:4305px;width:430px;height:211px;padding:20px 12px;background:#e9ded8;color:#000;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+  .m-footer-top{width:406px;height:138px;display:flex;gap:40px;align-items:flex-start}
+  .m-footer-brand{width:129px;height:91px;display:flex;flex-direction:column;gap:24px}
+  .m-footer-brand h2{margin:0;font:500 16px/normal Roboto,sans-serif}.m-footer-brand h2 span{color:#f7671d}
+  .m-footer-brand p{margin:0;font:300 10px/normal Roboto,sans-serif}
+  .m-footer-links{width:237px;display:flex;gap:24px;align-items:center;justify-content:center}
+  .m-footer-col{display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+  .m-footer-col.navcol{width:92px}.m-footer-col.contactcol{width:89px}
+  .m-footer-col h3{margin:0;font:500 14px/normal Roboto,sans-serif}
+  .m-footer-list{display:flex;flex-direction:column;gap:8px;font:300 12px/normal Roboto,sans-serif;color:#8e8e8e;white-space:nowrap}
+  .m-footer-list a{text-decoration:none;color:#8e8e8e}
+  .m-social{display:flex;gap:8px;align-items:center}.m-social img{width:20px;height:20px}.m-vk{width:20px;height:20px;border-radius:6px;background:#1a76ff;display:grid;place-items:center}.m-vk img{width:12px;height:8px}
+  .m-copy{margin:0;width:406px;text-align:center;font:300 8px/normal Roboto,sans-serif;color:#000}
+
+  /* Mobile form: responsive without changing desktop form rules */
+  .modal{padding:16px;align-items:center;justify-content:center}
+  .form-card{width:398px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:24px 20px;border-radius:25px}
+  .form-close{right:14px;top:14px;width:36px;height:36px;padding:8px}
+  .form-head{gap:12px;margin-bottom:24px}.form-head h2{font-size:24px}.step-indicator{font-size:20px}
+  .form-section{gap:14px}.form-section h3{font-size:20px}.form-section .sub{font-size:14px;line-height:1.35}
+  .choice-grid,.choice-grid.format-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px;width:100%}
+  .choice{height:68px;padding:8px 10px}.choice strong{font-size:15px}.choice small{font-size:11px}
+  .form-actions{margin-top:24px;gap:12px}.form-next,.form-back{height:52px;min-width:0;padding:0 24px;font-size:16px}.form-next{min-width:148px}.form-back{min-width:112px}
+  .contact-grid{width:100%;grid-template-columns:1fr;gap:14px}.field.full{grid-column:auto}.field{gap:8px}.field label{font-size:14px}
+  .field input,.field select,.field textarea{font-size:15px}.field input,.field select{height:52px}.field textarea{height:64px;padding:18px 14px}
+  .consent{gap:12px;margin-top:20px;font-size:14px;align-items:flex-start}.consent input{width:24px;height:24px}
+  .success{gap:22px}.success h2{font-size:26px!important;gap:12px!important}.success h2 img{width:34px!important;height:34px!important}.success-data{grid-template-columns:1fr;gap:10px;font-size:16px}.success-return{height:52px;padding:0 28px;font-size:16px}
+}
+
+
+/* === Current Figma sync: desktop 2:18 (1440 × 5894) === */
+.desktop-stage{height:5894px}
+.section-label{text-transform:uppercase}
+.btn-main,.btn-ghost{letter-spacing:0}
+.cards-row{gap:60px}
+.format-card.group{width:348px;padding-left:24px;padding-right:24px}
+.popular{background:rgba(255,255,255,.17);border-color:rgba(255,255,255,.4)}
+.age-card{width:390px}
+.age-card h3,.age-card p{width:340px}
+.instruments{top:3579px;height:465px}
+.inst-title{width:1440px}
+.inst-grid{width:1114px;height:238px;display:flex;flex-wrap:wrap;gap:32px;justify-content:center;align-content:flex-start}
+.inst-card{width:350px;height:103px;padding:24px 32px;border:.5px solid rgba(255,255,255,.09);border-radius:25px;background:#313030;backdrop-filter:blur(6.25px);display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;color:#fff;white-space:nowrap}
+.inst-card strong{font:500 20px/normal Inter,sans-serif}
+.inst-card>div{display:flex;gap:16px;align-items:center;justify-content:center;font:300 14px/1 Roboto,sans-serif;letter-spacing:.28px}
+.reviews{top:4044px}
+.pricing{top:4534px}
+.cta{top:5176px;height:287px}
+.footer{top:5490px}
+.step-indicator{font:300 28px/normal Roboto,sans-serif}
+.progress-track,.progress-fill{display:none!important}
+
+
+/* Exact application frames from current Figma */
+.form-card{padding:40px 80px}
+#formContent{width:100%;height:100%;display:flex;flex-direction:column;gap:40px}
+.form-card[data-screen="format"]{height:505px}
+.form-card[data-screen="mode"]{height:470px}
+.form-card[data-screen="time"]{height:607px}
+.form-card[data-screen="instrument"]{height:703px}
+.form-card[data-screen="contact"]{height:856px}
+.form-card[data-screen="success"]{height:327px}
+.form-head{margin:0;gap:16px}
+.form-question{display:flex;flex-direction:column;gap:20px;width:100%}
+.form-question.format-question{gap:16px}
+.form-question h3{margin:0;font:400 28px/normal Roboto,sans-serif}
+.form-question .sub{margin:0;font:300 18px/normal Roboto,sans-serif}
+.choice-grid,.choice-grid.format-grid{margin:0}
+.form-actions{margin:0;margin-top:auto}
+.form-back{height:63px}
+.form-next{height:61px}
+.consent{margin:0}
+.success{width:100%;height:247px;gap:60px}
+.success-top{display:flex;flex-direction:column;gap:24px;align-items:center;width:100%}
+.success h2{display:flex;align-items:center;gap:24px;margin:0}
+
+/* === Current Figma sync: mobile 74:2126 (430 × 4556) === */
+@media (max-width:767px){
+  .mobile-stage-wrap,.mobile-stage{height:4556px}
+  .m-menu-panel{display:none;position:absolute;z-index:60;right:0;top:0;width:154px;height:385px;padding:44px 24px 20px 12px;border:.5px solid rgba(255,255,255,.06);border-radius:0;background:rgba(0,0,0,.04);backdrop-filter:blur(13.95px);-webkit-backdrop-filter:blur(13.95px);flex-direction:column;gap:40px;align-items:flex-end;justify-content:center}
+  .m-menu-panel.open{display:flex}
+  .m-menu-panel a{width:117px;padding:0;font:500 14px/1 Roboto,sans-serif;letter-spacing:.28px;text-align:left;text-transform:uppercase;color:#fff}
+  .m-menu-close{position:absolute;right:24px;top:30px;width:18px;height:24px;border:0;background:transparent;padding:0;display:flex;align-items:center;justify-content:center}
+  .m-menu-close img{width:18px;height:12px}
+
+  .m-formats{top:410px;height:757px;padding:40px 16px 20px;background:#e9ded8;color:#000}
+  .m-format-card{border-color:rgba(0,0,0,.1);background:rgba(0,0,0,.05);color:#000}
+  .m-format-card .m-desc{color:rgba(0,0,0,.8)}
+  .m-tag{border-color:rgba(0,0,0,.05);background:rgba(0,0,0,.07);color:#000}
+  .m-popular{border-color:rgba(0,0,0,.56);background:rgba(0,0,0,.11);color:#000}
+  .m-about{top:1187px;background:transparent;color:#fff}
+  .m-about-card{border-color:#313030;background:#313030}
+  .m-about-card p{color:#fff}
+  .m-about-card .accent{color:#ea580c}
+  .m-how{left:0;top:1754px;width:430px;padding:20px 16px;background:#e9ded8;color:#000}
+  .m-how-list{width:398px}
+  .m-how-card{width:398px;background:rgba(49,48,48,.1);color:#000}
+  .m-how-num{background:#ea580c;color:#fff;font-weight:400}
+  .m-how-copy{width:286px}.m-how-copy p{width:286px}
+  .m-instruments{top:2275px;background:transparent;color:#fff;align-items:center}
+  .m-inst-list{width:430px;padding:0 16px;align-items:center}
+  .m-inst{width:235px;height:68px;padding:6px 16px;border-color:rgba(255,255,255,.09);background:#313030;display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:center;color:#fff}
+  .m-inst strong{font:500 14px/normal Inter,sans-serif}
+  .m-inst>div{display:flex;gap:16px;align-items:center;justify-content:center;font:300 10px/1 Roboto,sans-serif;letter-spacing:.2px;color:#fff;white-space:nowrap}
+  .m-reviews{top:2780px;background:#e9ded8;color:#000}
+  .m-review{background:rgba(49,48,48,.1)}
+  .m-review-person strong{color:#000}.m-review-person small{color:#414141}.m-review-copy p{color:#000}
+  .m-pricing{top:3469px;background:transparent;color:#fff}
+  .m-price-card{background:#313030;color:#fff}
+  .m-price-card h3,.m-price-sub{color:#fff}
+  .m-price span{color:#fff}
+  .m-price-btn{border-color:#fff;color:#fff}
+  .m-cta{left:0;top:4150px;width:430px;height:175px;padding:20px 16px;background:#e9ded8}
+  .m-cta-copy{width:398px;color:#000}
+  .m-consult{border-color:#000;color:#000}
+  .m-footer{top:4345px;height:191px;background:#262525;color:#fff}
+  .m-footer-top{height:118px}
+  .m-footer-links{align-items:flex-start}
+  .m-footer-col.navcol{height:118px}.m-footer-col.contactcol{height:118px}
+  .m-footer-list{font-size:10px;color:#b9b9b9}.m-footer-list a{color:#b9b9b9}
+  .m-social img{width:14px;height:14px}.m-vk{width:14px;height:14px;border-radius:5px}.m-vk img{width:9px;height:6px}
+  .m-copy{color:#fff}
+  .form-card[data-screen]{height:auto;min-height:0}
+  #formContent{height:auto;gap:24px}
+  .form-question{gap:10px}.form-question.format-question{gap:10px}.form-question h3{font-size:20px}.form-question .sub{font-size:14px;line-height:1.35}
+  .consent{margin:0}
+  .success{height:auto;gap:22px}.success-top{gap:14px}
+  .form-head .step-indicator{font-size:20px}
+}
+
+
+/* === Exact mobile application frames from current Figma (365px) === */
+@media (max-width:767px){
+  .modal{padding:8px;align-items:center;justify-content:center;overflow:auto}
+  .form-card{width:365px;max-width:calc(100vw - 16px);max-height:calc(100dvh - 16px);padding:40px 24px 24px;border-radius:25px;overflow:auto;background:#e9ded8;color:#000;box-shadow:0 24px 70px rgba(0,0,0,.38)}
+  .form-card[data-screen="format"],.form-card[data-screen="mode"]{height:312px}
+  .form-card[data-screen="time"]{height:460px}
+  .form-card[data-screen="instrument"]{height:572px}
+  .form-card[data-screen="contact"]{height:636px;padding-top:64px}
+  .form-card[data-screen="success"]{height:288px;padding-top:40px}
+  #formContent{width:100%;height:100%;display:flex;flex-direction:column;gap:32px}
+  .form-close{display:none;position:absolute;right:17px;top:12px;width:14px;height:14px;padding:0;border:0;border-radius:0;background:transparent;align-items:center;justify-content:center}
+  .form-close.show{display:flex}.form-close img{width:14px;height:14px}
+  .mform-head{width:317px;height:21px;display:flex;align-items:flex-start;justify-content:space-between;line-height:normal;white-space:nowrap}
+  .mform-head h2{margin:0;font:500 18px/normal Roboto,sans-serif;color:#7b7878}
+  .mform-step{font:300 14px/normal Roboto,sans-serif;color:#000}.form-card[data-screen="format"] .mform-step{color:#7b7878}
+  .mform-title{width:317px;min-height:21px;margin:0;font:500 18px/normal Roboto,sans-serif;text-align:center;color:#000}
+  .mform-contact-title{width:317px;height:45px;display:flex;flex-direction:column;gap:8px;text-align:center;color:#000}
+  .mform-contact-title h3{margin:0;font:500 18px/normal Roboto,sans-serif}.mform-contact-title p{margin:0;font:300 14px/normal Roboto,sans-serif}
+  .mform-format-row,.mform-mode-row{width:317px;height:60px;display:flex;gap:40px;align-items:center;justify-content:center}
+  .mform-choice{border:1px solid #000;background:transparent;color:#000;border-radius:25px;cursor:pointer;transition:background .16s ease,transform .12s ease,border-color .16s ease}
+  .mform-choice:hover{background:rgba(234,88,12,.08)}.mform-choice:active{transform:scale(.98)}.mform-choice.selected{border-color:#ea580c;background:rgba(234,88,12,.12)}.mform-choice.invalid{outline:2px solid #c90000;outline-offset:2px}
+  .mform-format-row .mform-choice{width:130px;height:60px;padding:12px;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+  .mform-format-row strong{font:400 16px/normal Roboto,sans-serif}.mform-format-row small{font:300 10px/normal Roboto,sans-serif;color:#767676}
+  .mform-mode-row .mform-choice{width:140px;height:60px;padding:12px;display:flex;align-items:center;justify-content:center;font:400 16px/normal Roboto,sans-serif;white-space:nowrap}
+  .mform-list{width:317px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start}
+  .mform-list.time{height:208px}.mform-list.instrument{height:320px}
+  .mform-list .mform-choice{width:317px;height:40px;padding:12px;display:flex;align-items:center;justify-content:space-between;text-align:left}
+  .mform-list .mform-choice strong{font:400 16px/normal Roboto,sans-serif}.mform-list .mform-choice small{font:300 10px/normal Roboto,sans-serif;color:#767676}
+  .mform-actions{width:317px;height:50px;margin-top:auto;display:flex;align-items:flex-start;justify-content:space-between}
+  .mform-actions.single{justify-content:flex-end}
+  .mform-back,.mform-next,.mform-return{height:50px;border-radius:25px;font:400 14px/normal Roboto,sans-serif;cursor:pointer;transition:transform .12s ease,filter .16s ease}
+  .mform-back{width:100px;border:1px solid #7b7878;background:transparent;color:#7b7878}.mform-next{width:120px;border:0;background:#ea580c;color:#fff}.mform-back:hover{background:rgba(0,0,0,.03)}.mform-next:hover,.mform-return:hover{filter:brightness(1.07)}.mform-back:active,.mform-next:active,.mform-return:active{transform:scale(.98)}
+  .mform-fields{width:317px;height:336px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .mfield{width:317px;height:72px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}.mfield label{font:300 14px/normal Roboto,sans-serif;color:#000}.mfield .req{color:#c90000}
+  .mfield input,.mfield select,.mfield textarea{width:317px;height:48px;border:0;border-radius:25px;background:#d5ccc9;box-shadow:inset 0 1px 5px rgba(0,0,0,.25);padding:0 16px;font:300 16px/normal Roboto,sans-serif;color:#000;outline:0}
+  .mfield textarea{padding-top:16px;resize:none;font-size:13px}.mfield input::placeholder,.mfield textarea::placeholder{color:#808080}.mfield select{appearance:none;background:#d5ccc9 url("https://www.figma.com/api/mcp/asset/a5ecd9d1-9b1a-4e27-b32f-81679f5b7211.svg") no-repeat calc(100% - 16px) 50%/36px 36px;padding-right:58px}
+  .mfield input.invalid,.mfield select.invalid{outline:2px solid #c90000}
+  .mform-success-head{width:317px;height:46px;display:flex;gap:24px;align-items:center;justify-content:center}.mform-success-head h2{margin:0;font:500 18px/normal Roboto,sans-serif}.mform-success-head img{width:46px;height:46px}
+  .mform-success-data{width:317px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:300 14px/normal Roboto,sans-serif;color:#000;white-space:nowrap}.mform-success-data b{font-weight:400}.mform-success-data .val{color:#ea580c}
+  .mform-return{width:169px;border:0;background:#ea580c;color:#fff;align-self:center}
+}
+
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}.lazy-reveal{opacity:1;transform:none}}
+
+/* final pixel-alignment fixes against current Figma */
+.age-card{flex:0 0 390px}
+@media (max-width:767px){
+  .m-footer-links{box-sizing:border-box;padding:0 24px;justify-content:flex-start}
+  .m-footer-col.contactcol{width:73px}
+}
+
+/* === Figma sync 2026-08-13: latest vibe-studio revision === */
+.desktop-stage{height:5960px}
+.footer{top:5490px;height:470px;padding:40px;gap:40px}
+.footer-info{width:1360px;height:336px;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.footer-top{width:1360px;height:270px;flex:0 0 270px}
+.footer-legal{width:1360px;height:42px;color:#8e8e8e;font:300 12px/normal Roboto,sans-serif;text-align:left}
+.copy{height:14px;line-height:normal}
+
+/* Desktop application frames — latest exact heights and horizontal step indicator */
+.form-card[data-screen="format"]{height:456px}
+.form-card[data-screen="mode"]{height:421px}
+.form-card[data-screen="time"]{height:558px}
+.form-card[data-screen="instrument"]{height:654px}
+.form-card[data-screen="contact"]{height:807px}
+.form-card[data-screen="success"]{height:327px}
+.form-head{width:100%;height:45px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:0;margin:0}
+.form-head h2{font:500 38px/normal Roboto,sans-serif;white-space:nowrap}
+.step-indicator{font:300 28px/normal Roboto,sans-serif;white-space:nowrap}
+#formContent{gap:40px}
+.consent{gap:20px;height:36px;align-items:center}
+.consent input{appearance:none;width:36px;height:36px;flex:0 0 36px;border:0;background:transparent;position:relative;margin:0}
+.consent input::before{content:"";position:absolute;left:6px;top:6px;width:24px;height:24px;border:2px solid #111;box-sizing:border-box}
+.consent input:checked::before{display:none}
+.consent input:checked{background:url("https://www.figma.com/api/mcp/asset/3a6013a9-1d38-4a1a-9e4f-921b7cb2b4d1.svg") center/36px 36px no-repeat}
+.consent input:checked::after{display:none}
+
+@media (max-width:767px){
+  .mobile-stage-wrap{height:4551px}
+  .mobile-stage{height:4551px}
+  #formContent{gap:32px}
+  .form-card[data-screen="format"],.form-card[data-screen="mode"]{height:312px}
+  .form-card[data-screen="time"]{height:460px}
+  .form-card[data-screen="instrument"]{height:572px}
+  .form-card[data-screen="contact"]{height:680px;padding:40px 24px 24px}
+  .form-card[data-screen="success"]{height:288px;padding-top:40px}
+
+  /* Pricing 430 × 613, cards 191 × 260 */
+  .m-pricing{top:3469px;height:613px;padding:20px 0;gap:20px}
+  .m-price-grid{width:430px;height:536px;padding:0 16px;grid-template-columns:191px 191px;grid-template-rows:260px 260px;gap:16px}
+  .m-price-card{width:191px;height:260px;padding:24px 16px 8px}
+  .m-price-card.individual,.m-price-card.group{padding:24px 24px 8px}
+  .m-price-bottom{height:117px;gap:32px;justify-content:flex-start}
+  .m-price-card.individual .m-price-bottom,.m-price-card.group .m-price-bottom{height:116px;gap:31px}
+  .m-price-btn{height:40px}
+
+  /* CTA 430 × 175; primary action is 234 × 56 */
+  .m-cta{left:0;top:4122px;width:430px;height:175px;padding:20px 16px;gap:24px}
+  .m-cta-actions{width:398px;height:62px;align-items:flex-start}
+  .m-consult{width:140px;height:62px;font:300 12px/normal Roboto,sans-serif}
+  .m-cta-primary{width:234px;height:56px;font:300 14px/normal Roboto,sans-serif}
+
+  /* Footer 430 × 234 with the business details added in the current Figma */
+  .m-footer{top:4317px;width:430px;height:234px;padding:20px 12px;gap:24px;background:#262525;color:#fff}
+  .m-footer-info{width:406px;height:161px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+  .m-footer-top{width:406px;height:118px;flex:0 0 118px}
+  .m-footer-legal{width:406px;height:27px;color:#8e8e8e;font:300 8px/normal Roboto,sans-serif;text-align:left}
+  .m-copy{width:406px;height:9px;color:#fff}
+
+  /* Mobile contact application frame is now 365 × 680 and includes consent */
+  .mform-consent{width:317px;height:36px;display:flex;gap:16px;align-items:center;color:#4e4e4e;font:400 14px/normal Roboto,sans-serif;cursor:pointer}
+  .mform-consent input{appearance:none;width:36px;height:36px;flex:0 0 36px;border:0;background:transparent;position:relative;margin:0}
+  .mform-consent input::before{content:"";position:absolute;left:6px;top:6px;width:24px;height:24px;border:2px solid #111;box-sizing:border-box}
+  .mform-consent input:checked::before{display:none}
+  .mform-consent input:checked{background:url("https://www.figma.com/api/mcp/asset/c0843a83-71c8-4a8d-a875-7c027b9de4a5.svg") center/36px 36px no-repeat}
+  .mform-consent.invalid{outline:2px solid #c90000;outline-offset:3px;border-radius:4px}
+  .mfield select{background-image:url("https://www.figma.com/api/mcp/asset/a5ecd9d1-9b1a-4e27-b32f-81679f5b7211.svg")}
+}
+
+/* === Figma sync 2026-08-13 13:26 — current changes === */
+.site-header{height:85px;background:rgba(230,230,230,.05);backdrop-filter:blur(5.95px);-webkit-backdrop-filter:blur(5.95px)}
+.header-inner{height:85px;padding:20px 9px 20px 24px}
+.brand-wrap{width:224px;height:34px;gap:8px}
+.header-logo{width:34px;height:34px;object-fit:contain}
+.brand{width:182px;font:500 30px/1 Roboto,sans-serif;letter-spacing:.6px;text-transform:uppercase;color:#cacaca}
+.brand .accent{color:#da7038}
+
+@media (max-width:767px){
+  .m-header{height:77px;padding:20px 24px}
+  .m-brand{width:134px;height:37px}
+  .m-brand img{width:37px;height:37px;object-fit:cover}
+  .m-brand-text{width:97px;font:500 16px/1 Roboto,sans-serif;letter-spacing:.32px;text-transform:uppercase;color:#cdcdcd}
+  .m-brand-text span{color:#da7038}
+  .m-menu-panel{right:-1px;top:0;width:154px;height:385px;padding:81px 24px 20px 12px;border:.5px solid rgba(255,255,255,.06);border-radius:0;background:rgba(0,0,0,.04);backdrop-filter:blur(13.95px);-webkit-backdrop-filter:blur(13.95px)}
+  .m-menu-panel.open{display:flex;flex-direction:column;gap:40px;align-items:flex-end;justify-content:flex-start}
+  .m-menu-panel a{width:117px;padding:0;font:500 14px/1 Roboto,sans-serif;letter-spacing:.28px;text-transform:uppercase;color:#fff}
+  .m-menu-close{right:24.5px;top:29px;width:18px;height:12px}
+  .m-menu-close img{width:18px;height:12px}
+  #formContent{gap:24px}
+  .form-card[data-screen="format"],.form-card[data-screen="mode"]{height:288px}
+  .form-card[data-screen="time"]{height:436px}
+  .form-card[data-screen="instrument"]{height:548px}
+  .form-card[data-screen="contact"]{height:648px;padding:40px 24px 24px}
+  .form-card[data-screen="success"]{height:272px;padding:40px 24px 24px}
+  .mform-consent input:checked{background-image:url("https://www.figma.com/api/mcp/asset/c0843a83-71c8-4a8d-a875-7c027b9de4a5.svg")}
+  .mfield select{background-image:url("https://www.figma.com/api/mcp/asset/a5ecd9d1-9b1a-4e27-b32f-81679f5b7211.svg")}
+  .m-copy{color:#929292}
+}
+
+
+/* === Figma sync 2026-08-13: pricing + exact latest spacing === */
+.pricing{
+  top:4534px;
+  width:1440px;
+  height:622px;
+  padding:40px 0;
+  gap:40px;
+}
+.price-row{
+  width:1180px;
+  height:480px;
+  gap:20px;
+  align-items:flex-start;
+}
+.price-card{
+  width:380px;
+  height:480px;
+  padding:32px 24px;
+  border-radius:25px;
+  flex:0 0 380px;
+}
+.price-top{
+  width:332px;
+  height:129px;
+  flex:0 0 129px;
+  gap:40px;
+  align-items:center;
+  justify-content:flex-start;
+}
+.price-card h3{
+  width:332px;
+  margin:0;
+  font:400 28px/normal Roboto,sans-serif;
+  text-align:center;
+}
+.price{
+  width:332px;
+  margin:0;
+  font:500 48px/normal Roboto,sans-serif;
+  text-align:center;
+}
+.price .price-unit,
+.price span{
+  font-size:28px;
+  font-weight:500;
+}
+.price-mid{
+  width:332px;
+  height:118px;
+  flex:0 0 118px;
+  gap:34px;
+  justify-content:flex-start;
+  font:400 18px/normal Roboto,sans-serif;
+}
+.price-mid>div{
+  width:332px;
+  text-align:center;
+}
+.price-mid ul{
+  width:257px;
+  margin:0 auto;
+  padding-left:27px;
+  font:300 18px/normal Roboto,sans-serif;
+}
+.price-btn{
+  width:332px;
+  height:52px;
+  flex:0 0 52px;
+  padding:12px 24px;
+  font:400 22px/normal Roboto,sans-serif;
+}
+
+@media (max-width:767px){
+  .m-pricing{
+    left:0;
+    top:3469px;
+    width:430px;
+    height:613px;
+    padding:20px 0;
+    gap:20px;
+  }
+  .m-price-grid{
+    width:430px;
+    height:536px;
+    padding:0 16px;
+    display:grid;
+    grid-template-columns:191px 191px;
+    grid-template-rows:260px 260px;
+    gap:16px;
+    align-items:start;
+  }
+  .m-price-card{
+    box-sizing:border-box;
+    width:191px;
+    height:260px;
+    padding:24px 16px 8px;
+    border-radius:25px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    align-items:center;
+    justify-content:flex-start;
+    background:#313030;
+  }
+  .m-price-card.individual,
+  .m-price-card.group{
+    padding:24px 24px 8px;
+  }
+  .m-price-title{
+    width:159px;
+    height:71px;
+    flex:0 0 71px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    gap:0;
+  }
+  .m-price-card.individual .m-price-title{
+    width:143px;
+    height:71px;
+    flex-basis:71px;
+  }
+  .m-price-card.group .m-price-title{
+    width:143px;
+    height:77px;
+    flex-basis:77px;
+  }
+  /* Group card has its lower block at y=141 and ends at y=258 in the 260px frame. */
+  .m-price-card.group{padding-bottom:2px;}
+  .m-price-card h3{
+    width:100%;
+    margin:0;
+    font:400 18px/normal Roboto,sans-serif;
+    text-align:center;
+  }
+  .m-price-sub{
+    width:100%;
+    margin:0;
+    font:200 14px/normal Roboto,sans-serif;
+    text-align:center;
+  }
+  .m-price-bottom{
+    width:159px;
+    height:117px;
+    flex:0 0 117px;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  .m-price-card.individual .m-price-bottom,
+  .m-price-card.group .m-price-bottom{
+    width:143px;
+    height:117px;
+    flex-basis:117px;
+    gap:32px;
+  }
+  .m-price{
+    width:100%;
+    height:45px;
+    flex:0 0 45px;
+    margin:0;
+    font:500 38px/normal Roboto,sans-serif;
+    text-align:center;
+    color:#f7671d;
+  }
+  .m-price span{
+    font-size:18px;
+    font-weight:500;
+    color:#fff;
+  }
+  .m-price-btn{
+    width:100%;
+    height:40px;
+    flex:0 0 40px;
+    padding:0;
+    border-radius:25px;
+    font:400 16px/normal Roboto,sans-serif;
+  }
+}
+
+/* Unified tactile feedback for every clickable button. */
+button:not(:disabled){transition-property:transform,filter,background-color,border-color,box-shadow;transition-duration:.18s;transition-timing-function:ease}
+@media (hover:hover) and (pointer:fine){button:not(:disabled):hover,button:not(:disabled):focus-visible{transform:translateY(-2px)}}
+button:not(:disabled):active{transform:translateY(0) scale(.98)}
+@media (prefers-reduced-motion:reduce){button:not(:disabled){transition:none!important;transform:none!important}}
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="brand-wrap"><img class="header-logo" src="https://www.figma.com/api/mcp/asset/8f1db26f-ead7-41d5-b143-843fb2b96a74.svg" alt=""><div class="brand"><span class="accent">Guitar</span> vibe</div></div>
+    <nav class="nav"><a href="#format">формат</a><a href="#age">возраст</a><a href="#about">о студии</a><a href="#instruments">инструменты</a><a href="#reviews">отзывы</a><a href="#pricing">стоимость</a></nav>
+    <a class="addr" id="mapAddressLink" href="https://yandex.by/maps/?text=%D0%91%D0%BE%D1%80%D0%BE%D0%B2%D0%BB%D1%8F%D0%BD%D1%8B%2C%20%D1%83%D0%BB.%2040%20%D0%BB%D0%B5%D1%82%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%2C%2023%D0%B0" target="_blank" rel="noopener noreferrer" aria-label="Открыть адрес на Яндекс Картах"><img src="https://www.figma.com/api/mcp/asset/3a85ec81-c67c-4243-b5d1-f2fb95448ec6.svg" alt=""><div class="addr-text">боровляны, ул. 40 лет победы, 23a</div></a>
+  </div>
+</header>
+
+<div class="mobile-stage-wrap" aria-label="Мобильная версия сайта">
+  <main class="mobile-stage">
+    <div class="m-hero-bg"><img src="https://www.figma.com/api/mcp/asset/226df0b6-5ff7-4ce8-9f8a-1414b3996014.png" alt=""></div>
+    <header class="m-header">
+      <div class="m-brand"><img src="https://www.figma.com/api/mcp/asset/fb5e2315-d717-494a-a183-e8dfa10e57ab.png" alt=""><div class="m-brand-text">Guitar <span>vibe</span></div></div>
+      <button class="m-menu-btn" id="mobileMenuBtn" type="button" aria-label="Открыть меню" aria-expanded="false"><img src="https://www.figma.com/api/mcp/asset/76f39781-64bb-46e4-835b-870f1eb38538.svg" alt=""></button><a class="m-map-link" id="mobileMapLink" href="https://yandex.by/maps/?text=%D0%91%D0%BE%D1%80%D0%BE%D0%B2%D0%BB%D1%8F%D0%BD%D1%8B%2C%20%D1%83%D0%BB.%2040%20%D0%BB%D0%B5%D1%82%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%2C%2023%D0%B0" target="_blank" rel="noopener noreferrer" aria-label="Открыть адрес на Яндекс Картах"></a>
+      <nav class="m-menu-panel" id="mobileMenuPanel"><button class="m-menu-close" type="button" aria-label="Закрыть меню"><img src="https://www.figma.com/api/mcp/asset/7989cd95-fad7-4f98-9fb5-92deb95da27f.svg" alt=""></button><a href="#m-formats">формат</a><a href="#age">возраст</a><a href="#m-about">о студии</a><a href="#m-instruments">инструменты</a><a href="#m-reviews">отзывы</a><a href="#m-pricing">стоимость</a></nav>
+    </header>
+
+    <section class="m-hero-card">
+      <div class="m-hero-copy"><h1>Набор учеников на <span>сентябрь</span></h1><p>сыграй свою любимую песню на гитаре</p></div>
+      <button class="m-main-btn open-form">Записаться на пробное занятие</button>
+    </section>
+
+    <section class="m-formats" id="m-formats"><p class="m-section-label">форматы</p><div class="m-format-list">
+      <article class="m-format-card group-mobile"><span class="m-popular">Популярно</span><h3>В группе</h3><p class="m-desc">Играй в дружном коллективе на любимой гитаре</p><div class="m-format-bottom"><div class="m-tags"><span class="m-tag">Акустическая гитара</span><span class="m-tag">Классическая гитара</span><span class="m-tag">Укулеле</span></div><button class="m-card-btn open-form" data-prefill-format="offline" data-prefill-mode="group">Записаться</button></div></article>
+      <article class="m-format-card offline"><h3>Офлайн в студии</h3><p class="m-desc">Атмосфера творчества в студии в Боровлянах</p><div class="m-format-bottom"><div class="m-tags"><span class="m-tag">Акустическая гитара</span><span class="m-tag">Классическая гитара</span><span class="m-tag">Бас гитара</span><span class="m-tag">Электро гитара</span><span class="m-tag">Укулеле</span></div><button class="m-card-btn open-form" data-prefill-format="offline">Записаться</button></div></article>
+      <article class="m-format-card"><h3>Онлайн урок</h3><p class="m-desc">Живой урок по видеосвязи</p><div class="m-format-bottom"><div class="m-tags"><span class="m-tag">Акустическая гитара</span><span class="m-tag">Классическая гитара</span><span class="m-tag">Укулеле</span></div><button class="m-card-btn open-form" data-prefill-format="online">Записаться</button></div></article>
+    </div></section>
+
+    <section class="m-about" id="m-about"><p class="m-section-label">о студии</p><div class="m-about-inner"><img class="m-about-photo" src="https://www.figma.com/api/mcp/asset/ff149523-440c-48de-85bc-3222d2307ab7.png" alt=""><div class="m-about-card"><p>В студии <span class="accent">«Играй, Гитара!»</span> каждый может научиться играть любимые песни.<br><br>Работаем с учениками любого уровня: от тех, кто держит гитару в первый раз, до тех, кто хочет освоить сложные техники и импровизацию.</p></div></div></section>
+
+    <section class="m-how" id="m-how"><p class="m-section-label">как проходят занятия</p><div class="m-how-list">
+      <article class="m-how-card"><div class="m-how-num">1</div><div class="m-how-copy"><h3>Знакомство</h3><p>На пробном уроке определяем ваш уровень, цели и составляем план обучения</p></div></article>
+      <article class="m-how-card"><div class="m-how-num">2</div><div class="m-how-copy"><h3>Техника</h3><p>Отрабатываем постановку рук, аппликатуру и базовые аккорды</p></div></article>
+      <article class="m-how-card"><div class="m-how-num">3</div><div class="m-how-copy"><h3>Репертуар</h3><p>Учим ваши любимые песни. От простых боев до сложных переборов и соло</p></div></article>
+      <article class="m-how-card"><div class="m-how-num">4</div><div class="m-how-copy"><h3>Свобода</h3><p>Импровизация, подбор на слух, выступления — всё, о чём вы мечтали</p></div></article>
+    </div></section>
+
+    <section class="m-instruments" id="m-instruments"><p class="m-section-label">инструменты</p><div class="m-inst-list">
+      <div class="m-inst"><strong>Аккустическая гитара</strong><div><span>индивидуально/группа</span><span>онлайн/офлайн</span></div></div>
+      <div class="m-inst"><strong>Классическая гитара</strong><div><span>индивидуально/группа</span><span>онлайн/офлайн</span></div></div>
+      <div class="m-inst"><strong>Укулеле</strong><div><span>индивидуально/группа</span><span>онлайн/офлайн</span></div></div>
+      <div class="m-inst"><strong>Электро гитара</strong><div><span>индивидуально</span><span>офлайн</span></div></div>
+      <div class="m-inst"><strong>Бас гитара</strong><div><span>индивидуально</span><span>офлайн</span></div></div>
+    </div></section>
+
+    <section class="m-reviews" id="m-reviews"><p class="m-section-label">отзывы</p><div class="m-review-list">
+      <article class="m-review"><div class="m-review-person"><img src="https://www.figma.com/api/mcp/asset/75d4462e-31a2-40b4-b72f-f7905567f153.png" alt=""><div class="person-copy"><strong>Артем К.</strong><small>занимается 4 месяца</small></div></div><div class="m-review-copy"><div class="m-stars"><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""></div><p>«За 3 месяца научился играть 15 любимых песен. Никогда не думал, что смогу так быстро. Преподаватель находит подход к каждому!»</p></div></article>
+      <article class="m-review tall"><div class="m-review-person"><img src="https://www.figma.com/api/mcp/asset/7a0ae014-d9d4-4985-9513-4c625e87f094.png" alt=""><div class="person-copy"><strong>Марина С.</strong><small>Занимается 8 месяцев</small></div></div><div class="m-review-copy"><div class="m-stars"><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""></div><p>«Хожу на офлайн-занятия в Боровлянах. Очень уютная атмосфера, всё объясняют доступно. Уже играю на корпоративах у друзей!»</p></div></article>
+      <article class="m-review"><div class="m-review-person"><img src="https://www.figma.com/api/mcp/asset/3ffda4de-50ac-49d3-a7d2-ca45bc2ed0d7.png" alt=""><div class="person-copy"><strong>Дмитрий В.</strong><small>Занимается 2 месяца</small></div></div><div class="m-review-copy"><div class="m-stars"><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""><img src="https://www.figma.com/api/mcp/asset/8423374b-9d22-4f15-a94a-84352b9148a8.svg" alt=""></div><p>«Пробовал учиться по YouTube — не получалось. Здесь за месяц разобрал то, что не мог понять полгода самостоятельно.»</p></div></article>
+    </div></section>
+
+    <section class="m-pricing" id="m-pricing"><p class="m-section-label">стоимость</p><div class="m-price-grid">
+      <article class="m-price-card trial"><div class="m-price-title"><h3>Пробное занятие<br>&nbsp;</h3><div class="m-price-sub">Для легкого начала</div></div><div class="m-price-bottom"><div class="m-price">0 <span>руб</span></div><button class="m-price-btn open-form">Записаться</button></div></article>
+      <article class="m-price-card individual"><div class="m-price-title"><h3>Индивидуально</h3><div class="m-price-sub">Абонемент на 4 занятия</div></div><div class="m-price-bottom"><div class="m-price">280 <span>руб</span></div><button class="m-price-btn open-form">Записаться</button></div></article>
+      <article class="m-price-card group"><div class="m-price-title"><h3>В группе</h3><div class="m-price-sub">Абонемент на 4 занятия</div></div><div class="m-price-bottom"><div class="m-price">160 <span>руб</span></div><button class="m-price-btn open-form" data-prefill-format="offline" data-prefill-mode="group">Записаться</button></div></article>
+    </div></section>
+
+    <section class="m-cta"><div class="m-cta-copy"><h2>Первый шаг к игре на гитаре — просто записаться</h2><p>Пробный урок – <strong>бесплатно</strong></p></div><div class="m-cta-actions"><button class="m-consult">Беспланая консультация</button><button class="m-cta-primary open-form">Записаться на пробное занятие</button></div></section>
+
+    <footer class="m-footer"><div class="m-footer-info"><div class="m-footer-top"><div class="m-footer-brand"><h2>ИГРАЙ, <span>ГИТАРА!</span></h2><p>Школа игры на гитаре в Боровлянах.<br>Научим играть ваши любимые песни с нуля.</p></div><div class="m-footer-links"><div class="m-footer-col navcol"><h3>Навигация</h3><div class="m-footer-list"><a href="#m-formats">Форматы</a><a href="#age">Возраст</a><a href="#m-how">Как проходит</a><a href="#m-instruments">Инструменты</a></div></div><div class="m-footer-col contactcol"><h3>Контакты</h3><div class="m-footer-list"><span class="m-social"><img src="https://www.figma.com/api/mcp/asset/61261284-0d1c-4c6e-aca1-c62c8ef72327.svg" alt="">Телеграм</span><span class="m-social"><img src="https://www.figma.com/api/mcp/asset/9b099248-07dd-4cef-b35a-36ed79a558ff.svg" alt="">Инстаграм</span><span class="m-social"><span class="m-vk"><img src="https://www.figma.com/api/mcp/asset/05b347ee-557e-4f83-9f16-72d71820b8ae.svg" alt=""></span>Вконтакте</span><span>+375298707651</span></div></div></div></div><div class="m-footer-legal">Guitar Vibe<br>Лацевич Ольга Геннадьевна<br>УНП: 555469758</div></div><p class="m-copy">© 2026 Guitar Vibe. Все права защищены.</p></footer>
+  </main>
+</div>
+
+<main class="desktop-stage">
+  <img class="hero-image" src="https://www.figma.com/api/mcp/asset/40fe2a88-7b15-4fe3-90f2-1a36f3237881.png" alt="">
+  <section class="hero-card lazy-reveal">
+    <div class="hero-copy"><div class="eyebrow">СЫГРАЙ СВОЮ ЛЮБИМУЮ ПЕСНЮ НА ГИТАРЕ</div><h1 class="hero-title"><span>НАБОР УЧЕНИКОВ</span><span>НА <span class="accent">СЕНТЯБРЬ</span></span></h1><p class="hero-desc">Занятия в студии <strong>“Играй, Гитара!”</strong> — это системный подход, поддержка и результат, который ты заметишь уже в первый месяц.<br><br>Индивидуальные занятия под твои цели и уровень подготовки!</p></div>
+    <div class="hero-actions"><button class="btn-main open-form">Записаться на пробное занятие</button><button class="btn-ghost" data-scroll="#how">Как проходят занятия</button></div>
+  </section>
+
+  <section class="format lazy-reveal" id="format"><p class="section-label">формат</p><div class="cards-row">
+    <article class="format-card"><div class="format-content"><h3>Офлайн в студии</h3><p class="desc">Живое общение, мгновенная коррекция техники и атмосфера творчества в студии в Боровлянах</p><div class="tags"><span class="tag">Акустическая гитара</span><span class="tag">Классическая гитара</span><span class="tag">Укулеле</span><span class="tag">Электрогитара</span><span class="tag">Бас гитара</span></div></div><button class="small-main open-form" data-prefill-format="offline">Записаться</button></article>
+    <article class="format-card group"><div class="popular">Популярно</div><div class="format-content"><h3>Групповой формат</h3><p class="desc">Играй в дружном коллективе на любимой гитаре<br>Особенно популярно среди детей</p><div class="tags"><span class="tag">Акустическая гитара</span><span class="tag">Классическая гитара</span><span class="tag">Укулеле</span></div></div><button class="small-main open-form" data-prefill-format="offline" data-prefill-mode="group">Записаться</button></article>
+    <article class="format-card"><div class="format-content"><h3>Онлайн уроки</h3><p class="desc">Живой урок по видеосвязи, разбор техники и короткий план практики осле занятия</p><div class="tags"><span class="tag">Акустическая гитара</span><span class="tag">Классическая гитара</span><span class="tag">Укулеле</span></div></div><button class="small-main open-form" data-prefill-format="online">Записаться</button></article>
+  </div></section>
+
+  <section class="age lazy-reveal" id="age"><p class="section-label">возраст</p><h2 class="age-title">Играть на гитаре можно в любом возрасте</h2><p class="age-sub">Принимаем учеников от 5 до 65 лет — с нуля и с опытом.<br>Программа, темп и репертуар подбираются под возраст, цели и уровень подготовки.</p><div class="age-grid"><div class="age-row">
+    <article class="age-card"><span class="age-badge">9-13 лет</span><h3>Школьники</h3><p>Осваиваем аккорды, любимые песни, ритм и базовую технику. Делаем занятия живыми и понятными</p></article>
+    <article class="age-card"><span class="age-badge">14-17 лет</span><h3>Подростки</h3><p>Разбираем современную музыку, развиваем технику, слух и уверенность, готовим к самостоятельной игре и выступлениям</p></article>
+    <article class="age-card"><span class="age-badge">18-35 лет</span><h3>Начать для себя</h3><p>Подойдёт тем, кто давно хотел играть, но откладывал. Быстро переходим к песням и строим понятный план прогресса</p></article>
+  </div><div class="age-row">
+    <article class="age-card"><span class="age-badge">18-35 лет</span><h3>Новое увлечение</h3><p>Спокойный темп, любимый репертуар и обучение без гонки. Можно начать с полного нуля в удобном формате</p></article>
+    <article class="age-card"><span class="age-badge">51-65 лет</span><h3>Играть никогда не поздно</h3><p>Адаптируем нагрузку и темп, подробно объясняем технику и постепенно двигаемся к музыке, которую хочется играть</p></article>
+  </div></div></section>
+
+  <section class="how lazy-reveal" id="how"><p class="section-label">как проходят занятия</p><div class="how-row">
+    <article class="how-card"><div class="num">1</div><h3>Знакомство</h3><p>На пробном уроке определяем ваш уровень, цели и составляем план обучения</p></article>
+    <article class="how-card"><div class="num">2</div><h3>Техника</h3><p>Отрабатываем постановку рук, аппликатуру и базовые аккорды</p></article>
+    <article class="how-card"><div class="num">3</div><h3>Репертуар</h3><p>Учим песни, которые вы любите. От простых боев до сложных переборов и соло</p></article>
+    <article class="how-card"><div class="num">4</div><h3>Свобода</h3><p>Импровизация, подбор на слух, выступления — всё, о чём вы мечтали</p></article>
+  </div></section>
+
+  <section class="about lazy-reveal" id="about"><p class="section-label">о студии</p><div class="about-inner"><img class="about-photo" src="https://www.figma.com/api/mcp/asset/3e24e32d-81c3-4928-9138-5b9dd61267cc.png" alt=""><div class="about-right"><h2 class="about-title">Научись играть с нуля или прокачай свой&nbsp;скилл</h2><div class="about-card"><p>В студии <span class="accent">«Играй, Гитара!»</span> каждый может научиться играть любимые песни.<br><br>Работаем с учениками любого уровня: от тех, кто держит гитару в первый раз, до тех, кто хочет освоить сложные техники и импровизацию.</p></div></div></div></section>
+
+  <section class="instruments lazy-reveal" id="instruments"><p class="section-label">инструменты</p><h2 class="inst-title">Для обучения в студии “Играй, гитара!” доступны разные инструменты</h2>
+    <div class="inst-grid">
+      <div class="inst-card"><strong>Аккустическая гитара</strong><div><span>индивидуально/в группе</span><span>онлайн/офлайн</span></div></div>
+      <div class="inst-card"><strong>Классическая гитара</strong><div><span>индивидуально/в группе</span><span>онлайн/офлайн</span></div></div>
+      <div class="inst-card"><strong>Укулеле</strong><div><span>индивидуально/в группе</span><span>онлайн/офлайн</span></div></div>
+      <div class="inst-card"><strong>Электрогитара</strong><div><span>индивидуально</span><span>офлайн</span></div></div>
+      <div class="inst-card"><strong>Бас гитара</strong><div><span>индивидуально</span><span>офлайн</span></div></div>
+    </div>
+  </section>
+
+  <section class="reviews lazy-reveal" id="reviews"><p class="section-label">отзывы</p><div class="review-row">
+    <article class="review"><img class="stars" src="https://www.figma.com/api/mcp/asset/e6e4615d-efb2-48e2-a683-8fe0221333ae.svg" alt=""><p class="review-text">«За 3 месяца научился играть 15 любимых песен. Никогда не думал, что смогу так быстро. Преподаватель находит подход к каждому!»</p><div class="review-person"><img src="https://www.figma.com/api/mcp/asset/410bb462-d97d-4eba-9aa5-8598df6ca707.png" alt=""><div><strong>Артем К.</strong><small>занимается 4 месяца</small></div></div></article>
+    <article class="review"><img class="stars" src="https://www.figma.com/api/mcp/asset/e6e4615d-efb2-48e2-a683-8fe0221333ae.svg" alt=""><p class="review-text">«Хожу на офлайн-занятия в Боровлянах. Очень уютная атмосфера, всё объясняют доступно. Уже играю на корпоративах у друзей!»</p><div class="review-person"><img src="https://www.figma.com/api/mcp/asset/9dda3618-4275-4451-89c9-8ad5c7c75b30.png" alt=""><div><strong>Марина С.</strong><small>Занимается 8 месяцев</small></div></div></article>
+    <article class="review"><img class="stars" src="https://www.figma.com/api/mcp/asset/e6e4615d-efb2-48e2-a683-8fe0221333ae.svg" alt=""><p class="review-text">«Пробовал учиться по YouTube — не получалось. Здесь за месяц разобрал то, что не мог понять полгода самостоятельно.»</p><div class="review-person"><img src="https://www.figma.com/api/mcp/asset/75d25a1c-09ce-4b44-9c7d-2f1e598810b3.png" alt=""><div><strong>Дмитрий В.</strong><small>Занимается 2 месяца</small></div></div></article>
+  </div></section>
+
+  <section class="pricing lazy-reveal" id="pricing"><p class="section-label">стоимость</p><div class="price-row">
+    <article class="price-card"><div class="price-top"><h3>Пробное занятие</h3><div class="price">0 <span>руб</span></div></div><div class="price-mid"><div>Если хотите попробовать</div><ul><li>Индивидуально</li><li>Определить цель</li><li>Онлайн и офлайн</li></ul></div><button class="price-btn open-form">Записаться</button></article>
+    <article class="price-card"><div class="price-top"><h3>В группе</h3><div class="price">160 <span>руб</span></div></div><div class="price-mid"><div>Абонемент на 4 занятия</div><ul><li>4 занятий по 60 минут</li><li>В дружном коллективе</li><li>Офлайн</li></ul></div><button class="price-btn open-form" data-prefill-format="offline" data-prefill-mode="group">Записаться</button></article>
+    <article class="price-card"><div class="price-top"><h3>Индивидуально</h3><div class="price">280 <span>руб</span></div></div><div class="price-mid"><div>Абонемент на 4 занятия</div><ul><li>4 занятия по 60 минут</li><li>Персональный план</li><li>Онлайн и офлайн</li></ul></div><button class="price-btn open-form">Записаться</button></article>
+  </div></section>
+
+  <section class="cta lazy-reveal"><div class="cta-inner"><div class="cta-copy"><h2>Первый шаг к игре на гитаре — просто записаться</h2><p>Пробный урок – <strong>бесплатно</strong></p></div><div class="cta-actions"><button class="cta-secondary"><span><span class="l1">Беспланая консультация</span><br><span class="l2">+37529 870 76 51</span></span></button><button class="cta-primary open-form">Записаться на пробное занятие</button></div></div></section>
+
+  <footer class="footer"><div class="footer-info"><div class="footer-top"><div class="footer-brand"><h2>ИГРАЙ, <span>ГИТАРА!</span></h2><p>Школа игры на гитаре в Боровлянах и онлайн.<br>Научим играть ваши любимые песни с нуля.</p></div><div class="footer-links"><div class="footer-col"><h3>Навигация</h3><div class="footer-list"><a href="#format">Форматы</a><a href="#age">Возраст</a><a href="#how">Как проходит</a><a href="#instruments">Инструменты</a></div></div><div class="footer-col"><h3>Контакты</h3><div class="footer-list"><span class="social-link"><img src="https://www.figma.com/api/mcp/asset/0b59a33c-73ed-40f3-b24c-a854867bad85.svg" alt="">Телеграм</span><span class="social-link"><img src="https://www.figma.com/api/mcp/asset/7e9518b4-d3ce-4e50-b0a5-7e2f5877319c.svg" alt="">Инстаграм</span><span class="social-link"><span class="vk-icon"><img src="https://www.figma.com/api/mcp/asset/e1ad5dfd-2b85-4c87-9006-794afb71ea18.svg" alt=""></span>Вконтакте</span><span>+375298707651</span></div></div></div></div><div class="footer-legal">Guitar Vibe<br>Лацевич Ольга Геннадьевна<br>УНП: 555469758</div></div><p class="copy">© 2026 Guitar Vibe. Все права защищены.</p></footer>
+</main>
+
+<div class="modal" id="modal" aria-hidden="true"><div class="form-card" id="formCard">
+  <button class="form-close" id="formClose" aria-label="Закрыть"><img src="https://www.figma.com/api/mcp/asset/5fad383b-4ae3-4fd7-9e94-6af47c91ef6f.svg" alt=""></button>
+  <div id="formContent"></div>
+</div></div>
+<script>
+const state={format:null,mode:null,time:null,instrument:null,name:'',phone:'',level:'Начинающий',wish:'',consent:false,screen:'format'};
+const modal=document.getElementById('modal'), formCard=document.getElementById('formCard'), content=document.getElementById('formContent'), closeBtn=document.getElementById('formClose'), siteHeader=document.getElementById('siteHeader');
+const allowedLimited=['Акустическая гитара','Классическая гитара','Укулеле','Не знаю'];
+const allInstruments=['Акустическая гитара','Классическая гитара','Укулеле','Бас гитара','Электрогитара','Не знаю'];
+const mobileForm=()=>window.matchMedia('(max-width:767px)').matches;
+function stepLabel(){return ({format:'1/5',mode:'2/5',time:'3/5',instrument:'4/5',contact:'5/5'})[state.screen]||''}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function choice(value,label,sub,selected){return `<button class="choice ${selected?'selected':''}" data-value="${value}"><strong>${label}</strong>${sub?`<small>${sub}</small>`:''}</button>`}
+function mchoice(value,label,sub,selected){return `<button class="mform-choice ${selected?'selected':''}" data-value="${value}"><strong>${label}</strong>${sub?`<small>${sub}</small>`:''}</button>`}
+function timeText(){return ({morning:'Будни утром',day:'Будни днем',evening:'Будни вечером',weekend:'Выходные'})[state.time]||''}
+function formatText(){return state.format==='online'?'Онлайн':(state.mode==='group'?'Офлайн, в группе':'Офлайн, индивидуально')}
+function desktopHead(){return `<div class="form-head"><h2>Запись на пробное занятие</h2><div class="step-indicator">${stepLabel()}</div></div>`}
+function mobileHead(){return `<div class="mform-head"><h2>Запись на пробное занятие</h2><div class="mform-step">${stepLabel()}</div></div>`}
+function renderDesktop(){
+  closeBtn.src=''; closeBtn.querySelector('img').src='https://www.figma.com/api/mcp/asset/5fad383b-4ae3-4fd7-9e94-6af47c91ef6f.svg';
+  closeBtn.classList.toggle('show',state.screen==='format');
+  let html=desktopHead();
+  if(state.screen==='format') html+=`<div class="form-question format-question"><h3>Где удобнее заниматься?</h3><p class="sub">Выберите формат – его можно поменять потом</p></div><div class="choice-grid format-grid">${choice('offline','В студии','Офлайн',state.format==='offline')}${choice('online','Дома','Онлайн',state.format==='online')}</div><div class="form-actions only-next"><button class="form-next" data-action="next">Дальше</button></div>`;
+  if(state.screen==='mode') html+=`<div class="form-question"><h3>Как вы хотите заниматься?</h3></div><div class="choice-grid format-grid">${choice('individual','Индивидуально','',state.mode==='individual')}${choice('group','В группе','',state.mode==='group')}</div><div class="form-actions"><button class="form-back" data-action="back">Назад</button><button class="form-next" data-action="next">Дальше</button></div>`;
+  if(state.screen==='time'){
+    const opts=[['morning','Будни утром','9:00–12:00'],['day','Будни днем','13:00–15:00'],['evening','Будни вечером','16:00–20:00'],['weekend','Выходные','время согласуем отдельно']];
+    html+=`<div class="form-question"><h3>Когда удобнее заниматься?</h3><p class="sub">Выберите предпочтительное время, а точное время согласуем при подтверждении заявки</p></div><div class="choice-grid">${opts.map(o=>choice(o[0],o[1],o[2],state.time===o[0])).join('')}</div><div class="form-actions"><button class="form-back" data-action="back">Назад</button><button class="form-next" data-action="next">Дальше</button></div>`;
+  }
+  if(state.screen==='instrument'){
+    const opts=(state.format==='online'||state.mode==='group')?allowedLimited:allInstruments;
+    html+=`<div class="form-question"><h3>Выберите инструмент</h3><p class="sub">Выбор можно будет изменить потом</p></div><div class="choice-grid">${opts.map(v=>choice(v,v,v==='Не знаю'?'поможем определиться':'',state.instrument===v)).join('')}</div><div class="form-actions"><button class="form-back" data-action="back">Назад</button><button class="form-next" data-action="next">Дальше</button></div>`;
+  }
+  if(state.screen==='contact') html+=`<div class="form-question"><h3>Оставьте свои контакты</h3><p class="sub">Мы позвоним для подтверждения заявки</p></div><div class="contact-grid"><div class="field"><label>Ваше Имя<span class="req">*</span></label><input id="fName" placeholder="Имя" value="${esc(state.name)}"></div><div class="field"><label>Телефон/Телеграм<span class="req">*</span></label><input id="fPhone" placeholder="+375 29 000-00-00" value="${esc(state.phone)}"></div><div class="field"><label>Уровень<span class="req">*</span></label><select id="fLevel"><option ${state.level==='Начинающий'?'selected':''}>Начинающий</option><option ${state.level==='Средний'?'selected':''}>Средний</option><option ${state.level==='Продвинутый'?'selected':''}>Продвинутый</option></select></div><div class="field full"><label>Что хотите научиться играть?</label><textarea id="fWish" placeholder="Например, любимые песни, аккорды, соло...">${esc(state.wish)}</textarea></div></div><label class="consent" id="consentWrap"><input type="checkbox" id="fConsent" ${state.consent?'checked':''}><span>Согласен на обработку контактных данных для связи по этой заявке</span></label><div class="form-actions"><button class="form-back" data-action="back">Назад</button><button class="form-next" data-action="submit">Отправить заявку</button></div>`;
+  if(state.screen==='success'){
+    closeBtn.classList.remove('show');
+    html=`<div class="success"><div class="success-top"><h2>Заявка принята <img src="https://www.figma.com/api/mcp/asset/b35b5284-dee3-41dd-bb30-68b30959b464.svg" alt=""></h2><div class="success-data"><div><div><b>Инструмент:</b> ${state.instrument}</div><div><b>Уровень:</b> ${state.level.toLowerCase()}</div></div><div><div><b>Формат:</b> ${formatText().toLowerCase()}</div><div><b>Время:</b> ${timeText().toLowerCase()}</div></div></div></div><button class="success-return" data-action="return">Вернуться на сайт</button></div>`;
+  }
+  content.innerHTML=html;
+}
+function renderMobile(){
+  closeBtn.querySelector('img').src='https://www.figma.com/api/mcp/asset/e81214c9-635c-426f-8f54-fae2a0843513.svg';
+  closeBtn.classList.toggle('show',state.screen==='format');
+  let html='';
+  if(state.screen==='format') html=`${mobileHead()}<h3 class="mform-title">Где удобнее заниматься?</h3><div class="mform-format-row">${mchoice('offline','В студии','Офлайн',state.format==='offline')}${mchoice('online','Дома','Онлайн',state.format==='online')}</div><div class="mform-actions single"><button class="mform-next" data-action="next">Дальше</button></div>`;
+  if(state.screen==='mode') html=`${mobileHead()}<h3 class="mform-title">Как вы хотите заниматься?</h3><div class="mform-mode-row">${mchoice('individual','Индивидуально','',state.mode==='individual')}${mchoice('group','В группе','',state.mode==='group')}</div><div class="mform-actions"><button class="mform-back" data-action="back">Назад</button><button class="mform-next" data-action="next">Дальше</button></div>`;
+  if(state.screen==='time'){
+    const opts=[['morning','Будни утром','9:00-12:00'],['day','Будни днем','13:00-15:00'],['evening','Будни вечером','16:00-20:00'],['weekend','Выходные','время согласуем отдельно']];
+    html=`${mobileHead()}<h3 class="mform-title">Когда удобнее заниматься?</h3><div class="mform-list time">${opts.map(o=>mchoice(o[0],o[1],o[2],state.time===o[0])).join('')}</div><div class="mform-actions"><button class="mform-back" data-action="back">Назад</button><button class="mform-next" data-action="next">Дальше</button></div>`;
+  }
+  if(state.screen==='instrument'){
+    const opts=(state.format==='online'||state.mode==='group')?allowedLimited:allInstruments;
+    const choices=opts.map(v=>mchoice(v,v,v==='Не знаю'?'поможем определиться':'',state.instrument===v)).join('');
+    html=`${mobileHead()}<h3 class="mform-title">Выберите инструмент</h3><div class="mform-list instrument">${choices}</div><div class="mform-actions"><button class="mform-back" data-action="back">Назад</button><button class="mform-next" data-action="next">Дальше</button></div>`;
+  }
+  if(state.screen==='contact') html=`${mobileHead()}<div class="mform-contact-title"><h3>Оставьте свои контакты</h3><p>Мы позвоним для подтверждения заявки</p></div><div class="mform-fields"><div class="mfield"><label>Ваше Имя<span class="req">*</span></label><input id="fName" placeholder="Имя" value="${esc(state.name)}"></div><div class="mfield"><label>Телефон<span class="req">*</span></label><input id="fPhone" placeholder="+375 29 000-00-00" value="${esc(state.phone)}"></div><div class="mfield"><label>Уровень<span class="req">*</span></label><select id="fLevel"><option ${state.level==='Начинающий'?'selected':''}>Начинающий</option><option ${state.level==='Средний'?'selected':''}>Средний</option><option ${state.level==='Продвинутый'?'selected':''}>Продвинутый</option></select></div><div class="mfield"><label>Что хотите научиться играть?</label><textarea id="fWish" placeholder="Например, любимые песни, аккорды, соло...">${esc(state.wish)}</textarea></div></div><label class="mform-consent" id="consentWrap"><input type="checkbox" id="fConsent" ${state.consent?'checked':''}><span>Согласен на обработку контактных данных для связи по этой заявке</span></label><div class="mform-actions"><button class="mform-back" data-action="back">Назад</button><button class="mform-next" data-action="submit">Дальше</button></div>`;
+  if(state.screen==='success'){
+    closeBtn.classList.remove('show');
+    html=`<div class="mform-success-head"><h2>Заявка принята</h2><img src="https://www.figma.com/api/mcp/asset/467281af-9f37-449a-b858-46a67a8e30f7.svg" alt=""></div><div class="mform-success-data"><div><b>Инструмент:</b> <span class="val">${state.instrument}</span></div><div><b>Уровень:</b> <span class="val">${state.level}</span></div><div><b>Формат:</b> <span class="val">${formatText()}</span></div><div><b>Время:</b> <span class="val">${timeText()}</span></div></div><button class="mform-return" data-action="return">Вернуться на сайт</button>`;
+  }
+  content.innerHTML=html;
+}
+function render(){formCard.dataset.screen=state.screen;mobileForm()?renderMobile():renderDesktop();bind()}
+function pick(key,val){state[key]=val;if(key==='format'){state.mode=null;if(val==='online'&&!allowedLimited.includes(state.instrument))state.instrument=null}if(key==='mode'&&val==='group'&&!allowedLimited.includes(state.instrument))state.instrument=null;render()}
+function next(){if(state.screen==='format'){if(!state.format)return markChoices();state.screen=state.format==='offline'?'mode':'time'}else if(state.screen==='mode'){if(!state.mode)return markChoices();state.screen='time'}else if(state.screen==='time'){if(!state.time)return markChoices();state.screen='instrument'}else if(state.screen==='instrument'){if(!state.instrument)return markChoices();state.screen='contact'}render()}
+function back(){if(state.screen==='mode')state.screen='format';else if(state.screen==='time')state.screen=state.format==='offline'?'mode':'format';else if(state.screen==='instrument')state.screen='time';else if(state.screen==='contact')state.screen='instrument';render()}
+function markChoices(){content.querySelectorAll('.choice,.mform-choice').forEach(x=>x.classList.add('invalid'));setTimeout(()=>content.querySelectorAll('.choice,.mform-choice').forEach(x=>x.classList.remove('invalid')),700)}
+function submit(){state.name=document.getElementById('fName').value.trim();state.phone=document.getElementById('fPhone').value.trim();state.level=document.getElementById('fLevel').value;state.wish=document.getElementById('fWish').value.trim();let ok=true;[['fName',state.name],['fPhone',state.phone],['fLevel',state.level]].forEach(([id,v])=>{const el=document.getElementById(id);el.classList.toggle('invalid',!v);if(!v)ok=false});state.consent=document.getElementById('fConsent').checked;const cw=document.getElementById('consentWrap');cw.classList.toggle('invalid',!state.consent);if(!state.consent)ok=false;if(!ok)return;state.screen='success';render()}
+function bind(){content.querySelectorAll('.choice,.mform-choice').forEach(el=>el.addEventListener('click',()=>{if(state.screen==='format')pick('format',el.dataset.value);else if(state.screen==='mode')pick('mode',el.dataset.value);else if(state.screen==='time')pick('time',el.dataset.value);else if(state.screen==='instrument')pick('instrument',el.dataset.value)}));content.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>{const a=el.dataset.action;if(a==='next')next();if(a==='back')back();if(a==='submit')submit();if(a==='return')closeModal()}))}
+function resetForm(){Object.assign(state,{format:null,mode:null,time:null,instrument:null,name:'',phone:'',level:'Начинающий',wish:'',consent:false,screen:'format'})}
+function openModal(prefFormat=null,prefMode=null){resetForm();if(prefFormat)state.format=prefFormat;if(prefMode){state.format='offline';state.mode=prefMode}state.screen='format';modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';render()}
+function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';resetForm()}
+closeBtn.addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal&&state.screen==='format')closeModal()});
+document.querySelectorAll('.open-form').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.prefillFormat||null,b.dataset.prefillMode||null)));
+document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>document.querySelector(b.dataset.scroll)?.scrollIntoView({behavior:'smooth'})));
+const mobileWrap=document.querySelector('.mobile-stage-wrap'),mobileMenuBtn=document.getElementById('mobileMenuBtn'),mobileMenuPanel=document.getElementById('mobileMenuPanel');
+function syncMobileStage(){if(!mobileWrap)return;const mobile=window.innerWidth<=767;if(!mobile){mobileWrap.style.height='';document.documentElement.style.removeProperty('--mobile-scale');return}const s=Math.min(1,window.innerWidth/430);document.documentElement.style.setProperty('--mobile-scale',s);mobileWrap.style.height=(4551*s)+'px'}
+syncMobileStage();window.addEventListener('resize',()=>{syncMobileStage();if(modal.classList.contains('open'))render()},{passive:true});
+if(mobileMenuBtn&&mobileMenuPanel){const closeMobileMenu=()=>{mobileMenuPanel.classList.remove('open');mobileMenuBtn.setAttribute('aria-expanded','false')};mobileMenuBtn.addEventListener('click',()=>{const open=mobileMenuPanel.classList.toggle('open');mobileMenuBtn.setAttribute('aria-expanded',String(open))});mobileMenuPanel.querySelector('.m-menu-close')?.addEventListener('click',closeMobileMenu);mobileMenuPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMobileMenu));document.addEventListener('pointerdown',e=>{if(mobileMenuPanel.classList.contains('open')&&!mobileMenuPanel.contains(e.target)&&!mobileMenuBtn.contains(e.target))closeMobileMenu()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileMenu()})}
+let lastY=window.scrollY,up=0;window.addEventListener('scroll',()=>{const y=window.scrollY,d=y-lastY;if(y<80){siteHeader.classList.remove('is-hidden');up=0}else if(d>5){siteHeader.classList.add('is-hidden');up=0}else if(d<-2){up+=-d;if(up>28)siteHeader.classList.remove('is-hidden')}lastY=y},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -5% 0px'});document.querySelectorAll('.lazy-reveal').forEach(el=>io.observe(el));
+</script>
+<script src="admin.js"></script>
+</body></html>

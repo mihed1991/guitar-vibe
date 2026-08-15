@@ -1,0 +1,23 @@
+# StyleSeed — Design Lock
+<!-- Selections persist here. This file cannot waive StyleSeed core invariants. -->
+- App domain: education
+- Surface: responsive-website
+- Surface adapter: product-ui
+- Page type: settings
+- Output grammar: operations-console
+- Grammar path: built-in:engine/RULESETS.md
+- Grammar fallback: operations-console
+- Reference confidence: n/a
+- Brand recipe: enterprise-workbench
+- Palette recipe: warm-clay-commerce
+- Aesthetic profile: none
+- Skin: existing Guitar Vibe
+- Primary action: #f7671d
+- Font: Roboto / Inter
+- Radius: soft (25–28px)
+- Elevation: restrained dark overlays + hairlines
+- Density: comfortable
+- Motion: restrained, respect reduced motion
+- Imagery/data role: no new imagery; content editing first
+- Signature move: section navigation with live save status
+- Locked: 2026-08-15
