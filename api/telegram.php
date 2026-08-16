@@ -154,6 +154,7 @@ function sendTelegramToConfiguredRecipients(array $config, string $text): array
     $lastError = null;
 
     foreach ($chatIds as $chatId) {
+        $chatId = (string) $chatId;
         try {
             sendTelegram($config, $chatId, $text);
             $sent++;
@@ -335,10 +336,11 @@ function requestedChatIds($value): array
         if ($chatId === '') {
             throw new ApiException(400, 'Укажите корректные chat_id получателей.');
         }
-        $chatIds[$chatId] = true;
+        if (!in_array($chatId, $chatIds, true)) {
+            $chatIds[] = $chatId;
+        }
     }
 
-    $chatIds = array_keys($chatIds);
     if (!$chatIds) {
         throw new ApiException(400, 'Добавьте хотя бы один chat_id.');
     }
@@ -356,11 +358,11 @@ function storedChatIds(array $settings): array
             continue;
         }
         $chatId = normalizeChatId($value);
-        if ($chatId !== '') {
-            $chatIds[$chatId] = true;
+        if ($chatId !== '' && !in_array($chatId, $chatIds, true)) {
+            $chatIds[] = $chatId;
         }
     }
-    return array_slice(array_keys($chatIds), 0, 20);
+    return array_slice($chatIds, 0, 20);
 }
 
 function clean($value, int $max): string
