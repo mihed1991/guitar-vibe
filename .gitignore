@@ -1,0 +1,6 @@
+.DS_Store
+api/config.php
+api/storage/*.json
+api/storage/*.log
+!api/storage/.gitkeep
+!api/storage/.htaccess

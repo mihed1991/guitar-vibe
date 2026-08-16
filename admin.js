@@ -4,6 +4,7 @@
   const STORAGE_KEY = 'guitar-vibe-content-v1';
   const PASSWORD_KEY = 'guitar-vibe-admin-password-v1';
   const SESSION_KEY = 'guitar-vibe-admin-unlocked';
+  const TELEGRAM_SETTINGS_KEY = 'guitar-vibe-telegram-settings-v1';
   const DEFAULT_PASSWORD = '020304';
 
   const sections = [
@@ -17,6 +18,7 @@
     { id: 'pricing', title: 'Стоимость', hint: 'Цены вводятся без валюты. Преимущества тарифа — по одному пункту в строке.' },
     { id: 'cta', title: 'Призыв к действию', hint: 'Финальный блок записи и телефон консультации. Телефон автоматически станет кликабельным.' },
     { id: 'footer', title: 'Футер и контакты', hint: 'Добавляйте ссылки, телефоны и email. Телефоны получают ссылку tel:, email — mailto:.' },
+    { id: 'telegram', title: 'Заявки в Telegram', hint: 'Подключите защищённый обработчик, укажите chat_id получателя и отправьте тестовое сообщение.' },
     { id: 'security', title: 'Доступ', hint: 'Смените пароль администратора. Новый пароль действует сразу на этом устройстве.' }
   ];
 
@@ -152,6 +154,7 @@
   let currentSection = 'general';
   let dirty = false;
   let overlay;
+  let telegramSettings = readTelegramSettings();
 
   applyModel(model);
   installAdminEntries();
@@ -168,6 +171,15 @@
     return element.textContent.replace(/\s+/g,' ').trim();
   }
   function readStored(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null')}catch{return null} }
+  function readTelegramSettings(){
+    const configured=document.querySelector('meta[name="guitar-vibe-leads-endpoint"]')?.content.trim()||'';
+    const defaultEndpoint=configured||(!location.hostname.endsWith('github.io')?new URL('./api/telegram.php',location.href).href:'');
+    try{
+      const stored=JSON.parse(localStorage.getItem(TELEGRAM_SETTINGS_KEY)||'null')||{};
+      return {endpoint:String(stored.endpoint||defaultEndpoint),adminKey:String(stored.adminKey||''),chatId:String(stored.chatId||'')};
+    }catch{return {endpoint:defaultEndpoint,adminKey:'',chatId:''}}
+  }
+  function saveTelegramSettingsLocal(){localStorage.setItem(TELEGRAM_SETTINGS_KEY,JSON.stringify(telegramSettings))}
   function normalizeModel(source){
     const contacts=Array.isArray(source&&source.contacts)?source.contacts.map(contact=>{const preset=defaultContacts.find(item=>item.label===contact.label);return {...contact,image:contact.image===undefined?(preset?.image||''):contact.image}}):clone(defaultContacts);
     return { content:{...defaults,...(source&&source.content||{})}, contacts, hiddenItems:{...(source&&source.hiddenItems||{})}, hiddenSections:{...(source&&source.hiddenSections||{})}, hiddenElements:{...(source&&source.hiddenElements||{})} };
@@ -346,7 +358,7 @@
     const content=workspace.querySelector('.admin-content');content.replaceChildren();
     const help=document.createElement('p');help.className='admin-help';help.textContent=section.hint;content.append(help);
     if(publicSections[section.id]){const hidden=Boolean(draft.hiddenSections[section.id]),toggle=document.createElement('button');toggle.type='button';toggle.className=hidden?'admin-secondary admin-section-toggle':'admin-danger admin-section-toggle';toggle.textContent=hidden?'+ Добавить блок на сайт':'Удалить блок с сайта';toggle.addEventListener('click',()=>{draft.hiddenSections[section.id]=!hidden;markDirty();renderSection()});content.append(toggle)}
-    if(section.id==='footer') renderFooterEditor(content); else if(section.id==='security') renderSecurity(content); else if(repeaters[section.id])renderRepeaterEditor(content,section.id);else{renderFields(content,entries.filter(entry=>entry.section===section.id));renderManagedElements(content,section.id)}
+    if(section.id==='footer') renderFooterEditor(content); else if(section.id==='telegram') renderTelegramEditor(content); else if(section.id==='security') renderSecurity(content); else if(repeaters[section.id])renderRepeaterEditor(content,section.id);else{renderFields(content,entries.filter(entry=>entry.section===section.id));renderManagedElements(content,section.id)}
     updateStatus();
   }
   function renderFields(container,fields){
@@ -400,6 +412,34 @@
     [type,label,value,image].forEach(input=>input.addEventListener('input',()=>{draft.contacts[index][input.dataset.contact]=input.value;markDirty()}));
     row.querySelector('[data-contact-file]').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;const button=event.target.parentElement;button.childNodes[0].textContent='Обработка…';try{draft.contacts[index].image=await imageFileToDataUrl(file,256);image.value=draft.contacts[index].image;markDirty()}catch{window.alert('Не удалось обработать иконку.')}finally{button.childNodes[0].textContent='Загрузить иконку'}});
     row.querySelector('.admin-remove').addEventListener('click',()=>{draft.contacts.splice(index,1);markDirty();renderSection()});return row;
+  }
+  function renderTelegramEditor(container){
+    const grid=document.createElement('div');grid.className='admin-fields';
+    const card=document.createElement('section');card.className='admin-security-card admin-telegram-card';
+    card.innerHTML=`<h3>Получатель заявок</h3><p>Токен Telegram-бота хранится только в закрытом PHP-конфиге и никогда не показывается на сайте. Здесь сохраняются адрес обработчика, отдельный ключ управления и chat_id получателя.</p><form class="admin-telegram-grid"><label class="admin-label wide">Адрес PHP-обработчика<input class="admin-input" name="endpoint" type="url" inputmode="url" autocomplete="url" placeholder="https://ваш-домен.by/api/telegram.php" required><small>На основном PHP-домене адрес подставляется автоматически.</small></label><label class="admin-label">Ключ подключения<input class="admin-input" name="adminKey" type="password" autocomplete="off" placeholder="Ключ из api/config.php" required><small>Это не токен бота и не пароль от админки.</small></label><label class="admin-label">Telegram chat_id<input class="admin-input" name="chatId" inputmode="text" autocomplete="off" placeholder="Например: 123456789" required><small>Для личного чата сначала нажмите Start у своего бота.</small></label><div class="admin-telegram-actions"><button class="admin-secondary" type="button" data-telegram-action="connect">Проверить подключение</button><button class="admin-primary" type="submit">Сохранить получателя</button><button class="admin-secondary" type="button" data-telegram-action="test">Отправить тест</button></div></form><p class="admin-inline-message" role="status" aria-live="polite"></p>`;
+    const form=card.querySelector('form'),message=card.querySelector('.admin-inline-message');
+    form.elements.endpoint.value=telegramSettings.endpoint;
+    form.elements.adminKey.value=telegramSettings.adminKey;
+    form.elements.chatId.value=telegramSettings.chatId;
+    const sync=()=>{telegramSettings={endpoint:form.elements.endpoint.value.trim(),adminKey:form.elements.adminKey.value.trim(),chatId:form.elements.chatId.value.trim()}};
+    const run=async(button,work,loading)=>{message.className='admin-inline-message';message.textContent='';button.disabled=true;const old=button.textContent;button.textContent=loading;try{sync();const success=await work();saveTelegramSettingsLocal();message.classList.add('success');message.textContent=success||'Готово.'}catch(error){message.classList.add('error');message.textContent=error?.message||'Не удалось выполнить запрос.'}finally{button.disabled=false;button.textContent=old}};
+    form.addEventListener('submit',event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');run(button,async()=>{const result=await telegramApi('settings',{method:'PUT',body:{chatId:telegramSettings.chatId}});telegramSettings.chatId=result.chatId||telegramSettings.chatId;form.elements.chatId.value=telegramSettings.chatId;return 'Получатель сохранён.'},'Сохраняем…')});
+    card.querySelector('[data-telegram-action="connect"]').addEventListener('click',event=>run(event.currentTarget,async()=>{const result=await telegramApi('settings');telegramSettings.chatId=result.chatId||'';form.elements.chatId.value=telegramSettings.chatId;return telegramSettings.chatId?'Подключение работает. Получатель загружен.':'Подключение работает. Теперь укажите chat_id.'},'Проверяем…'));
+    card.querySelector('[data-telegram-action="test"]').addEventListener('click',event=>run(event.currentTarget,async()=>{await telegramApi('test',{method:'POST'});return 'Тестовое сообщение отправлено в Telegram.'},'Отправляем…'));
+    grid.append(card);container.append(grid);
+  }
+  async function telegramApi(action,{method='GET',body}={}){
+    const endpoint=String(telegramSettings.endpoint||'').trim().replace(/\/$/,'');
+    if(!/^https:\/\//i.test(endpoint))throw new Error('Укажите HTTPS-адрес обработчика.');
+    if(!telegramSettings.adminKey)throw new Error('Укажите ключ подключения.');
+    const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+    try{
+      const separator=endpoint.includes('?')?'&':'?';
+      const response=await fetch(`${endpoint}${separator}action=${encodeURIComponent(action)}`,{method,headers:{authorization:`Bearer ${telegramSettings.adminKey}`,...(body?{'content-type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,signal:controller.signal});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result?.ok)throw new Error(result?.error||'Обработчик вернул ошибку.');
+      return result;
+    }catch(error){if(error?.name==='AbortError')throw new Error('Обработчик не ответил вовремя.');throw error}finally{clearTimeout(timeout)}
   }
   function renderSecurity(container){
     const grid=document.createElement('div');grid.className='admin-fields';
