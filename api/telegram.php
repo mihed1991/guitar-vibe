@@ -61,24 +61,22 @@ try {
     if ($action === 'settings' && $method === 'GET') {
         ensureAdmin($config);
         $settings = readJsonFile(settingsPath($config), []);
-        respond(['ok' => true, 'chatId' => (string) ($settings['chat_id'] ?? '')]);
+        $chatIds = storedChatIds($settings);
+        respond(['ok' => true, 'chatIds' => $chatIds, 'chatId' => $chatIds[0] ?? '']);
     }
 
     if ($action === 'settings' && $method === 'PUT') {
         ensureAdmin($config);
         $body = readRequestJson();
-        $chatId = normalizeChatId($body['chatId'] ?? '');
-        if ($chatId === '') {
-            throw new ApiException(400, 'Укажите корректный chat_id.');
-        }
-        writeJsonFile(settingsPath($config), ['chat_id' => $chatId]);
-        respond(['ok' => true, 'chatId' => $chatId]);
+        $chatIds = requestedChatIds($body['chatIds'] ?? ($body['chatId'] ?? []));
+        writeJsonFile(settingsPath($config), ['chat_ids' => $chatIds]);
+        respond(['ok' => true, 'chatIds' => $chatIds, 'chatId' => $chatIds[0]]);
     }
 
     if ($action === 'test' && $method === 'POST') {
         ensureAdmin($config);
-        sendTelegram($config, configuredChatId($config), "<b>Guitar Vibe</b>\n\n✅ Тестовое сообщение. Заявки с сайта будут приходить в этот чат.");
-        respond(['ok' => true]);
+        $delivery = sendTelegramToConfiguredRecipients($config, "<b>Guitar Vibe</b>\n\n✅ Тестовое сообщение. Заявки с сайта будут приходить в этот чат.");
+        respond(['ok' => true] + $delivery);
     }
 
     throw new ApiException(404, 'Маршрут не найден.');
@@ -143,9 +141,37 @@ function receiveLead(array $config): void
         '<i>' . html(date('d.m.Y H:i')) . '</i>',
     ]);
 
-    sendTelegram($config, configuredChatId($config), $message);
+    sendTelegramToConfiguredRecipients($config, $message);
     rememberLead($config, $fingerprint);
     respond(['ok' => true]);
+}
+
+function sendTelegramToConfiguredRecipients(array $config, string $text): array
+{
+    $chatIds = configuredChatIds($config);
+    $sent = 0;
+    $failed = 0;
+    $lastError = null;
+
+    foreach ($chatIds as $chatId) {
+        try {
+            sendTelegram($config, $chatId, $text);
+            $sent++;
+        } catch (Throwable $error) {
+            $failed++;
+            $lastError = $error;
+            error_log('[guitar-vibe-telegram] recipient ' . hash('sha256', $chatId) . ': ' . $error->getMessage());
+        }
+    }
+
+    if ($sent === 0) {
+        if ($lastError instanceof ApiException) {
+            throw $lastError;
+        }
+        throw new ApiException(502, 'Не удалось отправить сообщение получателям Telegram.');
+    }
+
+    return ['sent' => $sent, 'failed' => $failed];
 }
 
 function sendTelegram(array $config, string $chatId, string $text): void
@@ -217,14 +243,14 @@ function ensureAdmin(array $config): void
     }
 }
 
-function configuredChatId(array $config): string
+function configuredChatIds(array $config): array
 {
     $settings = readJsonFile(settingsPath($config), []);
-    $chatId = normalizeChatId($settings['chat_id'] ?? '');
-    if ($chatId === '') {
+    $chatIds = storedChatIds($settings);
+    if (!$chatIds) {
         throw new ApiException(503, 'Получатель Telegram ещё не настроен.');
     }
-    return $chatId;
+    return $chatIds;
 }
 
 function checkRequestLimits(array $config, string $fingerprint): bool
@@ -287,6 +313,54 @@ function normalizeChatId($value): string
 {
     $text = trim((string) $value);
     return preg_match('/^-?\d{5,16}$/', $text) || preg_match('/^@[A-Za-z][A-Za-z0-9_]{4,31}$/', $text) ? $text : '';
+}
+
+function requestedChatIds($value): array
+{
+    $values = is_array($value) ? $value : [$value];
+    if (count($values) > 20) {
+        throw new ApiException(400, 'Можно добавить не более 20 получателей.');
+    }
+
+    $chatIds = [];
+    foreach ($values as $raw) {
+        if (!is_scalar($raw) && $raw !== null) {
+            throw new ApiException(400, 'Укажите корректные chat_id получателей.');
+        }
+        $text = trim((string) $raw);
+        if ($text === '') {
+            continue;
+        }
+        $chatId = normalizeChatId($text);
+        if ($chatId === '') {
+            throw new ApiException(400, 'Укажите корректные chat_id получателей.');
+        }
+        $chatIds[$chatId] = true;
+    }
+
+    $chatIds = array_keys($chatIds);
+    if (!$chatIds) {
+        throw new ApiException(400, 'Добавьте хотя бы один chat_id.');
+    }
+    return $chatIds;
+}
+
+function storedChatIds(array $settings): array
+{
+    $values = isset($settings['chat_ids']) && is_array($settings['chat_ids'])
+        ? $settings['chat_ids']
+        : (isset($settings['chat_id']) ? [$settings['chat_id']] : []);
+    $chatIds = [];
+    foreach ($values as $value) {
+        if (!is_scalar($value) && $value !== null) {
+            continue;
+        }
+        $chatId = normalizeChatId($value);
+        if ($chatId !== '') {
+            $chatIds[$chatId] = true;
+        }
+    }
+    return array_slice(array_keys($chatIds), 0, 20);
 }
 
 function clean($value, int $max): string

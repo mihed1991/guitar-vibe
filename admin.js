@@ -18,7 +18,7 @@
     { id: 'pricing', title: 'Стоимость', hint: 'Цены вводятся без валюты. Преимущества тарифа — по одному пункту в строке.' },
     { id: 'cta', title: 'Призыв к действию', hint: 'Финальный блок записи и телефон консультации. Телефон автоматически станет кликабельным.' },
     { id: 'footer', title: 'Футер и контакты', hint: 'Добавляйте ссылки, телефоны и email. Телефоны получают ссылку tel:, email — mailto:.' },
-    { id: 'telegram', title: 'Заявки в Telegram', hint: 'Подключите защищённый обработчик, укажите chat_id получателя и отправьте тестовое сообщение.' },
+    { id: 'telegram', title: 'Заявки в Telegram', hint: 'Подключите защищённый обработчик, добавьте chat_id получателей и отправьте тестовое сообщение всем.' },
     { id: 'security', title: 'Доступ', hint: 'Смените пароль администратора. Новый пароль действует сразу на этом устройстве.' }
   ];
 
@@ -176,8 +176,10 @@
     const defaultEndpoint=configured||(!location.hostname.endsWith('github.io')?new URL('./api/telegram.php',location.href).href:'');
     try{
       const stored=JSON.parse(localStorage.getItem(TELEGRAM_SETTINGS_KEY)||'null')||{};
-      return {endpoint:String(stored.endpoint||defaultEndpoint),adminKey:String(stored.adminKey||''),chatId:String(stored.chatId||'')};
-    }catch{return {endpoint:defaultEndpoint,adminKey:'',chatId:''}}
+      const legacyId=String(stored.chatId||'').trim();
+      const chatIds=(Array.isArray(stored.chatIds)?stored.chatIds:(legacyId?[legacyId]:[])).map(value=>String(value||'').trim()).filter(Boolean);
+      return {endpoint:String(stored.endpoint||defaultEndpoint),adminKey:String(stored.adminKey||''),chatIds:[...new Set(chatIds)]};
+    }catch{return {endpoint:defaultEndpoint,adminKey:'',chatIds:[]}}
   }
   function saveTelegramSettingsLocal(){localStorage.setItem(TELEGRAM_SETTINGS_KEY,JSON.stringify(telegramSettings))}
   function normalizeModel(source){
@@ -416,16 +418,42 @@
   function renderTelegramEditor(container){
     const grid=document.createElement('div');grid.className='admin-fields';
     const card=document.createElement('section');card.className='admin-security-card admin-telegram-card';
-    card.innerHTML=`<h3>Получатель заявок</h3><p>Токен Telegram-бота хранится только в закрытом PHP-конфиге и никогда не показывается на сайте. Здесь сохраняются адрес обработчика, отдельный ключ управления и chat_id получателя.</p><form class="admin-telegram-grid"><label class="admin-label wide">Адрес PHP-обработчика<input class="admin-input" name="endpoint" type="url" inputmode="url" autocomplete="url" placeholder="https://ваш-домен.by/api/telegram.php" required><small>На основном PHP-домене адрес подставляется автоматически.</small></label><label class="admin-label">Ключ подключения<input class="admin-input" name="adminKey" type="password" autocomplete="off" placeholder="Ключ из api/config.php" required><small>Это не токен бота и не пароль от админки.</small></label><label class="admin-label">Telegram chat_id<input class="admin-input" name="chatId" inputmode="text" autocomplete="off" placeholder="Например: 123456789" required><small>Для личного чата сначала нажмите Start у своего бота.</small></label><div class="admin-telegram-actions"><button class="admin-secondary" type="button" data-telegram-action="connect">Проверить подключение</button><button class="admin-primary" type="submit">Сохранить получателя</button><button class="admin-secondary" type="button" data-telegram-action="test">Отправить тест</button></div></form><p class="admin-inline-message" role="status" aria-live="polite"></p>`;
-    const form=card.querySelector('form'),message=card.querySelector('.admin-inline-message');
+    card.innerHTML=`<h3>Получатели заявок</h3><p>Токен Telegram-бота хранится только в закрытом PHP-конфиге. Добавьте chat_id всех аккаунтов, которым должны одновременно приходить заявки.</p><form class="admin-telegram-grid"><label class="admin-label wide">Адрес PHP-обработчика<input class="admin-input" name="endpoint" type="url" inputmode="url" autocomplete="url" placeholder="https://ваш-домен.by/api/telegram.php" required><small>На основном PHP-домене адрес подставляется автоматически.</small></label><label class="admin-label wide">Ключ подключения<input class="admin-input" name="adminKey" type="password" autocomplete="off" placeholder="Ключ из api/config.php" required><small>Это не токен бота и не пароль от админки.</small></label><div class="admin-telegram-recipients wide"><div class="admin-telegram-recipients-head"><strong>Аккаунты получателей</strong><span data-recipient-count aria-live="polite"></span></div><div class="admin-telegram-recipient-list" data-recipient-list></div><button class="admin-secondary admin-telegram-add" type="button" data-telegram-action="add">+ Добавить chat_id</button><small>Каждый аккаунт должен сначала открыть Telegram-бота и нажать Start. Можно добавить до 20 получателей.</small></div><div class="admin-telegram-actions"><button class="admin-secondary" type="button" data-telegram-action="connect">Проверить подключение</button><button class="admin-primary" type="submit">Сохранить получателей</button><button class="admin-secondary" type="button" data-telegram-action="test">Отправить тест всем</button></div></form><p class="admin-inline-message" role="status" aria-live="polite"></p>`;
+    const form=card.querySelector('form'),message=card.querySelector('.admin-inline-message'),recipientList=card.querySelector('[data-recipient-list]'),recipientCount=card.querySelector('[data-recipient-count]');
     form.elements.endpoint.value=telegramSettings.endpoint;
     form.elements.adminKey.value=telegramSettings.adminKey;
-    form.elements.chatId.value=telegramSettings.chatId;
-    const sync=()=>{telegramSettings={endpoint:form.elements.endpoint.value.trim(),adminKey:form.elements.adminKey.value.trim(),chatId:form.elements.chatId.value.trim()}};
-    const run=async(button,work,loading)=>{message.className='admin-inline-message';message.textContent='';button.disabled=true;const old=button.textContent;button.textContent=loading;try{sync();const success=await work();saveTelegramSettingsLocal();message.classList.add('success');message.textContent=success||'Готово.'}catch(error){message.classList.add('error');message.textContent=error?.message||'Не удалось выполнить запрос.'}finally{button.disabled=false;button.textContent=old}};
-    form.addEventListener('submit',event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');run(button,async()=>{const result=await telegramApi('settings',{method:'PUT',body:{chatId:telegramSettings.chatId}});telegramSettings.chatId=result.chatId||telegramSettings.chatId;form.elements.chatId.value=telegramSettings.chatId;return 'Получатель сохранён.'},'Сохраняем…')});
-    card.querySelector('[data-telegram-action="connect"]').addEventListener('click',event=>run(event.currentTarget,async()=>{const result=await telegramApi('settings');telegramSettings.chatId=result.chatId||'';form.elements.chatId.value=telegramSettings.chatId;return telegramSettings.chatId?'Подключение работает. Получатель загружен.':'Подключение работает. Теперь укажите chat_id.'},'Проверяем…'));
-    card.querySelector('[data-telegram-action="test"]').addEventListener('click',event=>run(event.currentTarget,async()=>{await telegramApi('test',{method:'POST'});return 'Тестовое сообщение отправлено в Telegram.'},'Отправляем…'));
+    let recipientDraft=telegramSettings.chatIds.length?[...telegramSettings.chatIds]:[''];
+    const validChatId=value=>/^-?\d{5,16}$/.test(value)||/^@[A-Za-z][A-Za-z0-9_]{4,31}$/.test(value);
+    const updateRecipientCount=()=>{const total=recipientDraft.filter(value=>String(value||'').trim()).length;recipientCount.textContent=`Добавлено: ${total}`};
+    const renderRecipients=()=>{
+      recipientList.replaceChildren();
+      recipientDraft.forEach((value,index)=>{
+        const row=document.createElement('div');row.className='admin-telegram-recipient-row';
+        row.innerHTML=`<label class="admin-label" for="telegram-chat-${index}">chat_id ${index+1}<input class="admin-input" id="telegram-chat-${index}" inputmode="text" autocomplete="off" placeholder="Например: 123456789" required></label><button class="admin-remove" type="button" aria-label="Удалить chat_id ${index+1}">×</button>`;
+        const input=row.querySelector('input'),remove=row.querySelector('button');input.value=value;
+        const validate=()=>{const normalized=input.value.trim();input.setCustomValidity(!normalized?'Укажите chat_id.':validChatId(normalized)?'':'Допустимы числовой chat_id или @username канала.');return input.reportValidity()};
+        input.addEventListener('input',()=>{recipientDraft[index]=input.value;input.setCustomValidity('');updateRecipientCount()});
+        input.addEventListener('blur',validate);
+        remove.disabled=recipientDraft.length===1;remove.addEventListener('click',()=>{recipientDraft.splice(index,1);renderRecipients()});
+        recipientList.append(row);
+      });
+      card.querySelector('[data-telegram-action="add"]').disabled=recipientDraft.length>=20;
+      updateRecipientCount();
+    };
+    const normalizedRecipients=()=>{
+      const inputs=[...recipientList.querySelectorAll('input')];let valid=true;
+      inputs.forEach(input=>{const value=input.value.trim();input.setCustomValidity(!value?'Укажите chat_id.':validChatId(value)?'':'Допустимы числовой chat_id или @username канала.');if(!input.reportValidity())valid=false});
+      if(!valid)throw new Error('Проверьте chat_id получателей.');
+      return [...new Set(inputs.map(input=>input.value.trim()))];
+    };
+    const syncConnection=()=>{telegramSettings={...telegramSettings,endpoint:form.elements.endpoint.value.trim(),adminKey:form.elements.adminKey.value.trim()}};
+    const sync=()=>{syncConnection();telegramSettings.chatIds=normalizedRecipients()};
+    const run=async(button,work,loading,{validateRecipients=true}={})=>{message.className='admin-inline-message';message.textContent='';button.disabled=true;const old=button.textContent;button.textContent=loading;try{validateRecipients?sync():syncConnection();const success=await work();saveTelegramSettingsLocal();message.classList.add('success');message.textContent=success||'Готово.'}catch(error){message.classList.add('error');message.textContent=error?.message||'Не удалось выполнить запрос.'}finally{button.disabled=false;button.textContent=old}};
+    card.querySelector('[data-telegram-action="add"]').addEventListener('click',()=>{if(recipientDraft.length>=20)return;recipientDraft.push('');renderRecipients();recipientList.lastElementChild?.querySelector('input')?.focus()});
+    form.addEventListener('submit',event=>{event.preventDefault();const button=form.querySelector('[type="submit"]');run(button,async()=>{const result=await telegramApi('settings',{method:'PUT',body:{chatIds:telegramSettings.chatIds}});telegramSettings.chatIds=Array.isArray(result.chatIds)?result.chatIds:telegramSettings.chatIds;recipientDraft=[...telegramSettings.chatIds];renderRecipients();return `Получатели сохранены: ${telegramSettings.chatIds.length}.`},'Сохраняем…')});
+    card.querySelector('[data-telegram-action="connect"]').addEventListener('click',event=>run(event.currentTarget,async()=>{const result=await telegramApi('settings');telegramSettings.chatIds=Array.isArray(result.chatIds)?result.chatIds:(result.chatId?[result.chatId]:[]);recipientDraft=telegramSettings.chatIds.length?[...telegramSettings.chatIds]:[''];renderRecipients();return telegramSettings.chatIds.length?`Подключение работает. Получателей: ${telegramSettings.chatIds.length}.`:'Подключение работает. Теперь добавьте chat_id.'},'Проверяем…',{validateRecipients:false}));
+    card.querySelector('[data-telegram-action="test"]').addEventListener('click',event=>run(event.currentTarget,async()=>{const result=await telegramApi('test',{method:'POST'});return `Тест отправлен получателям: ${result.sent||telegramSettings.chatIds.length}.`},'Отправляем…',{validateRecipients:false}));
+    renderRecipients();
     grid.append(card);container.append(grid);
   }
   async function telegramApi(action,{method='GET',body}={}){
