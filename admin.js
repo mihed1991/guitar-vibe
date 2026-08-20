@@ -166,8 +166,8 @@
     if(entry.attr) return element.getAttribute(entry.attr)||'';
     if(entry.mode==='textBeforeElement') return Array.from(element.childNodes).filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join(' ').replace(/\s+/g,' ').trim();
     if(entry.mode==='price') return Array.from(element.childNodes).filter(n=>n.nodeType===Node.TEXT_NODE).map(n=>n.textContent).join('').trim();
-    if(entry.mode==='list') return Array.from(element.children).map(el=>el.textContent.trim()).filter(Boolean).join('\n');
-    if(entry.mode==='inlineList') return Array.from(element.children).map(el=>el.textContent.trim()).filter(Boolean).join('\n');
+    if(entry.mode==='list') return Array.from(element.children).map(el=>el.textContent.replace(/\s+/g,' ').trim()).filter(Boolean).join('\n');
+    if(entry.mode==='inlineList') return Array.from(element.children).map(el=>el.textContent.replace(/\s+/g,' ').trim()).filter(Boolean).join('\n');
     return element.textContent.replace(/\s+/g,' ').trim();
   }
   function readStored(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null')}catch{return null} }
@@ -187,6 +187,9 @@
     ['desktopHeroImage','mobileHeroImage','aboutDesktopImage','aboutMobileImage'].forEach(key=>{
       if(isExpiredFigmaAsset(content[key]))content[key]=defaults[key];
     });
+    entries.filter(entry=>entry.mode==='list'||entry.mode==='inlineList').forEach(entry=>{
+      if(entry.key in content)content[entry.key]=splitList(content[entry.key]).join('\n');
+    });
     const contacts=Array.isArray(source&&source.contacts)?source.contacts.map(contact=>{
       const preset=defaultContacts.find(item=>item.label===contact.label);
       const image=contact.image===undefined||isExpiredFigmaAsset(contact.image)?(preset?.image||''):contact.image;
@@ -196,7 +199,13 @@
   }
   function isExpiredFigmaAsset(value){return /^https:\/\/www\.figma\.com\/api\/mcp\/asset\//i.test(String(value||''))}
   function clone(value){return JSON.parse(JSON.stringify(value))}
-  function splitList(value){return String(value||'').split(/\n|,/).map(v=>v.trim()).filter(Boolean)}
+  function splitList(value){
+    return String(value||'').split(/\n|,/).map(v=>v.replace(/\s+/g,' ').trim()).filter(Boolean).reduce((items,item)=>{
+      if(/^гитара$/i.test(item)&&items.length&&/^(акустическая|классическая|электро|бас)$/i.test(items[items.length-1]))items[items.length-1]+=` ${item}`;
+      else items.push(item);
+      return items;
+    },[]);
+  }
   function setText(element,value){element.textContent=String(value??'')}
   function applyEntry(entry,value){
     const elements=document.querySelectorAll(entry.selectors);
@@ -263,6 +272,7 @@
     applyRepeaterVisibility(next.hiddenItems||{});
     applySectionVisibility(next.hiddenSections||{});
     applyManagedElementVisibility(next.hiddenElements||{});
+    reflowMobileStage();
     renderContacts(next.contacts);
     document.title=next.content.pageTitle||'Guitar Vibe';
   }
@@ -272,8 +282,52 @@
       targets.forEach(element=>{element.style.display=hiddenItems[section]?.[index]?'none':''});
     }));
   }
-  function applySectionVisibility(hiddenSections){Object.entries(publicSections).forEach(([section,selectors])=>document.querySelectorAll(selectors).forEach(element=>{element.style.visibility=hiddenSections[section]?'hidden':''}))}
+  function applySectionVisibility(hiddenSections){Object.entries(publicSections).forEach(([section,selectors])=>document.querySelectorAll(selectors).forEach(element=>{element.style.display=hiddenSections[section]?'none':''}))}
   function applyManagedElementVisibility(hiddenElements){Object.entries(managedElements).forEach(([key,item])=>document.querySelectorAll(item.selector).forEach(element=>{element.style.visibility=hiddenElements[key]?'hidden':''}))}
+  function reflowMobileStage(){
+    const stage=document.querySelector('.mobile-stage'),wrap=document.querySelector('.mobile-stage-wrap');
+    if(!stage||!wrap)return;
+    if(window.innerWidth>767)return;
+    const isShown=element=>element&&element.style.display!=='none';
+    const visibleHeight=(listSelector,itemSelector,gap)=>{
+      const list=document.querySelector(listSelector),items=list?Array.from(list.querySelectorAll(itemSelector)).filter(isShown):[];
+      const height=items.reduce((sum,item)=>sum+item.offsetHeight,0)+Math.max(0,items.length-1)*gap;
+      if(list)list.style.height=`${height}px`;
+      return height;
+    };
+    const formatsList=visibleHeight('.m-format-list','.m-format-card',16);
+    const howList=visibleHeight('.m-how-list','.m-how-card',16);
+    const instrumentsList=visibleHeight('.m-inst-list','.m-inst',16);
+    const reviewsList=visibleHeight('.m-review-list','.m-review',16);
+    const pricingItems=Array.from(document.querySelectorAll('.m-price-grid .m-price-card')).filter(isShown).length;
+    const pricingGrid=document.querySelector('.m-price-grid'),pricingRows=Math.ceil(pricingItems/2),pricingHeight=pricingRows?pricingRows*260+(pricingRows-1)*16:0;
+    if(pricingGrid)pricingGrid.style.height=`${pricingHeight}px`;
+    const sections=[
+      {selector:'.m-formats',height:formatsList+101,gap:20},
+      {selector:'.m-about',height:547,gap:20},
+      {selector:'.m-how',height:howList+81,gap:20},
+      {selector:'.m-instruments',height:instrumentsList+81,gap:20},
+      {selector:'.m-reviews',height:reviewsList+81,gap:20},
+      {selector:'.m-pricing',height:pricingHeight+77,gap:40},
+      {selector:'.m-cta',height:175,gap:20},
+      {selector:'.m-footer',height:234,gap:0}
+    ];
+    const general=document.querySelector('.m-hero-card'),generalVisible=isShown(general);
+    let cursor=generalVisible?410:0,pendingGap=0;
+    sections.forEach(section=>{
+      const element=document.querySelector(section.selector);
+      if(!isShown(element))return;
+      cursor+=pendingGap;
+      element.style.top=`${cursor}px`;
+      element.style.height=`${section.height}px`;
+      cursor+=section.height;
+      pendingGap=section.gap;
+    });
+    stage.style.height=`${cursor}px`;
+    wrap.dataset.contentHeight=String(cursor);
+    window.syncMobileStage?.();
+  }
+  window.addEventListener('resize',reflowMobileStage,{passive:true});
   function updateMapLink(address){
     document.querySelectorAll('#mapAddressLink,#mobileMapLink').forEach(link=>{
       link.href=`https://yandex.by/maps/?text=${encodeURIComponent(String(address||''))}`;
