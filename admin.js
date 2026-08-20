@@ -141,9 +141,9 @@
   const managedElements={heroSecondary:{section:'general',label:'дополнительную кнопку',selector:'.hero-card .btn-ghost'}};
 
   const defaultContacts = [
-    { type:'link', label:'Телеграм', value:'', image:'https://www.figma.com/api/mcp/asset/0b59a33c-73ed-40f3-b24c-a854867bad85.svg' },
-    { type:'link', label:'Инстаграм', value:'', image:'https://www.figma.com/api/mcp/asset/7e9518b4-d3ce-4e50-b0a5-7e2f5877319c.svg' },
-    { type:'link', label:'Вконтакте', value:'', image:'https://www.figma.com/api/mcp/asset/e1ad5dfd-2b85-4c87-9006-794afb71ea18.svg' },
+    { type:'link', label:'Телеграм', value:'', image:'./assets/telegram.svg' },
+    { type:'link', label:'Инстаграм', value:'', image:'./assets/instagram.svg' },
+    { type:'link', label:'Вконтакте', value:'', image:'./assets/vk.svg' },
     { type:'phone', label:'+375298707651', value:'+375298707651', image:'' }
   ];
 
@@ -183,9 +183,18 @@
   }
   function saveTelegramSettingsLocal(){localStorage.setItem(TELEGRAM_SETTINGS_KEY,JSON.stringify(telegramSettings))}
   function normalizeModel(source){
-    const contacts=Array.isArray(source&&source.contacts)?source.contacts.map(contact=>{const preset=defaultContacts.find(item=>item.label===contact.label);return {...contact,image:contact.image===undefined?(preset?.image||''):contact.image}}):clone(defaultContacts);
-    return { content:{...defaults,...(source&&source.content||{})}, contacts, hiddenItems:{...(source&&source.hiddenItems||{})}, hiddenSections:{...(source&&source.hiddenSections||{})}, hiddenElements:{...(source&&source.hiddenElements||{})} };
+    const content={...defaults,...(source&&source.content||{})};
+    ['desktopHeroImage','mobileHeroImage','aboutDesktopImage','aboutMobileImage'].forEach(key=>{
+      if(isExpiredFigmaAsset(content[key]))content[key]=defaults[key];
+    });
+    const contacts=Array.isArray(source&&source.contacts)?source.contacts.map(contact=>{
+      const preset=defaultContacts.find(item=>item.label===contact.label);
+      const image=contact.image===undefined||isExpiredFigmaAsset(contact.image)?(preset?.image||''):contact.image;
+      return {...contact,image};
+    }):clone(defaultContacts);
+    return { content, contacts, hiddenItems:{...(source&&source.hiddenItems||{})}, hiddenSections:{...(source&&source.hiddenSections||{})}, hiddenElements:{...(source&&source.hiddenElements||{})} };
   }
+  function isExpiredFigmaAsset(value){return /^https:\/\/www\.figma\.com\/api\/mcp\/asset\//i.test(String(value||''))}
   function clone(value){return JSON.parse(JSON.stringify(value))}
   function splitList(value){return String(value||'').split(/\n|,/).map(v=>v.trim()).filter(Boolean)}
   function setText(element,value){element.textContent=String(value??'')}
